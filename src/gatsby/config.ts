@@ -5,7 +5,11 @@ const gatsbyConfig: GatsbyConfig = {
     siteUrl: 'https://www.yourdomain.tld',
     title: 'client',
   },
-  plugins: ['gatsby-plugin-postcss', 'gatsby-plugin-styled-components'],
+  plugins: [
+    'gatsby-plugin-postcss',
+    'gatsby-plugin-styled-components',
+    'gatsby-plugin-react-helmet',
+  ],
 }
 
 export default gatsbyConfig
