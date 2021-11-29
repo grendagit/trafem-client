@@ -1,3 +1,1 @@
-import jestConfig from './tests/jest.config.base'
-
-export default jestConfig
+export { default } from './tests/jest.config.base'

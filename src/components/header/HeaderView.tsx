@@ -1,13 +1,18 @@
 import React from 'react'
 
 import { Logo } from '../logo'
-import { Navigation } from '../navigation'
+import { Navigation, Route } from '../navigation'
+import { TestID } from '../../types/test.type'
+import {
+  appBarStyle,
+  toolBarStyle,
+  boxStyle,
+  iconButtonStyle,
+} from './header.styles'
 
-import { IconButton } from '@mui/material'
-import { MenuOutlined } from '@mui/icons-material'
-import tw from 'twin.macro'
+import { AppBar, Toolbar, IconButton, Box, SvgIcon } from '@mui/material'
 
-const navigationRoutes = [
+const navigationRoutes: Route[] = [
   {
     path: 'add-offer',
     text: 'Zamieść ofertę',
@@ -18,29 +23,26 @@ const navigationRoutes = [
   },
 ]
 
-export const HeaderView = () => {
+type Props = TestID
+
+export const HeaderView = (props: Props) => {
   return (
-    <header
-      className="bg-white text-gray-400 font-sans text-sm font-light"
-      data-testid="header"
-    >
-      <div className="h-12 px-4 flex justify-between items-center gap-x-12 border-b border-gray-200">
-        <div>
+    <AppBar position="sticky" elevation={0} sx={appBarStyle} {...props}>
+      <Toolbar variant="dense" sx={toolBarStyle}>
+        <Box>
           <Logo />
-        </div>
-        <div className="flex-1">
+        </Box>
+        <Box sx={boxStyle}>
           <Navigation routes={navigationRoutes} />
-        </div>
-        <div>
-          <IconButton
-            sx={{
-              ...tw`text-crayola hover:bg-black hover:bg-opacity-5`,
-            }}
-          >
-            <MenuOutlined />
+        </Box>
+        <Box>
+          <IconButton sx={iconButtonStyle}>
+            <SvgIcon>
+              <path d="M 2 5 L 2 7 L 22 7 L 22 5 L 2 5 z M 2 11 L 2 13 L 22 13 L 22 11 L 2 11 z M 2 17 L 2 19 L 22 19 L 22 17 L 2 17 z" />
+            </SvgIcon>
           </IconButton>
-        </div>
-      </div>
-    </header>
+        </Box>
+      </Toolbar>
+    </AppBar>
   )
 }

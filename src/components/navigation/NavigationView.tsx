@@ -1,26 +1,28 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import { Route } from './navigation.type'
+import { Route } from './navigation.types'
+import { TestID } from '../../types/test.type'
+import { listStyle, listItemStyle } from './navigation.styles'
+
+import { List, ListItem } from '@mui/material'
 
 type Props = {
   routes: Route[]
-}
+} & TestID
 
-export const NavigationView = ({ routes }: Props) => {
+export const NavigationView = ({ routes, ...rest }: Props) => {
   const routeItems = routes.map(({ path, text }) => (
-    <li key={path}>
-      <Link className="ml-5" to={path}>
-        {text}
-      </Link>
-    </li>
+    <ListItem disablePadding sx={listItemStyle} key={path}>
+      <Link to={path}>{text}</Link>
+    </ListItem>
   ))
 
   return (
-    <nav data-testid="navigation">
-      <div>
-        <ul className="flex justify-end items-center">{routeItems}</ul>
-      </div>
+    <nav {...rest}>
+      <List disablePadding sx={listStyle}>
+        {routeItems}
+      </List>
     </nav>
   )
 }

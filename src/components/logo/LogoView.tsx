@@ -1,9 +1,14 @@
 import React from 'react'
+import { Link } from 'gatsby'
 
-export const LogoView = () => {
+import { TestID } from '../../types/test.type'
+
+type Props = TestID
+
+export const LogoView = (props: Props) => {
   return (
-    <div data-testid="logo">
-      <a href="#">Logo</a>
+    <div {...props}>
+      <Link to="/">Logo</Link>
     </div>
   )
 }
