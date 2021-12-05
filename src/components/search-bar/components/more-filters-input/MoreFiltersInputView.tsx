@@ -10,6 +10,7 @@ import {
   popoverCustomButtonStyle,
   popoverPaperStyle,
 } from './more-filters-input.styles'
+import Filter from '../../../../assets/svg/icons/filter.inline.svg'
 
 import { SvgIcon, Grid } from '@mui/material'
 
@@ -33,11 +34,7 @@ export const MoreFiltersInputView = ({
   return (
     <>
       <OutlinedPrimaryButton
-        endIcon={
-          <SvgIcon sx={buttonEndIconStyle}>
-            <path d="M 3 3 L 3 5 L 4 5 L 9 13 L 9 21 L 15 21 L 15 13 L 20 5 L 21 5 L 21 3 L 20 3 L 4 3 L 3 3 z M 6.359375 5 L 17.642578 5 L 13 12.425781 L 13 19 L 11 19 L 11 12.425781 L 6.359375 5 z" />
-          </SvgIcon>
-        }
+        endIcon={<SvgIcon component={Filter} sx={buttonEndIconStyle} />}
         onClick={handleExpandMoreButtonClick}
         fullWidth
         sx={buttonStyle}

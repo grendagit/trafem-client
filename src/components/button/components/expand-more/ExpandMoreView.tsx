@@ -5,6 +5,7 @@ import { OutlinedPrimaryButton } from '../outlined-primary'
 import { TextPrimaryButton } from '../text-primary'
 import { buttonStyle, endIconStyle } from './expand-more.styles'
 import { prepareStyles } from '../../../../helpers/prepare-styles.helper'
+import ExpandArrow from '../../../../assets/svg/icons/expand-arrow.inline.svg'
 
 import { SvgIconProps, SvgIcon } from '@mui/material'
 
@@ -34,9 +35,11 @@ export const ExpandMoreView = <T extends Keys>({
     <Component
       endIcon={
         <div className={`transform ${expanded ? 'rotate-180' : 'rotate-0'}`}>
-          <SvgIcon sx={prepareStyles(endIconStyle, endIconSx)} {...endIconRest}>
-            <path d="M 7.4296875 9.5 L 5.9296875 11 L 12 17.070312 L 18.070312 11 L 16.570312 9.5 L 12 14.070312 L 7.4296875 9.5 z" />
-          </SvgIcon>
+          <SvgIcon
+            component={ExpandArrow}
+            sx={prepareStyles(endIconStyle, endIconSx)}
+            {...endIconRest}
+          />
         </div>
       }
       sx={prepareStyles(buttonStyle, sx, false)}
