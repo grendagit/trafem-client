@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Option } from '../../../option'
-import { capitalizeFirstLetter } from '../../../../helpers/capitalize-first-letter.helper'
 import { OnClick, Type } from './option-input.types'
 import { boxStyle, innerBoxStyle, outerBoxStyle } from './option-input.styles'
 
@@ -15,10 +14,10 @@ type Props = {
 }
 
 export const OptionInputView = ({ types, value, onClick }: Props) => {
-  const options = types.map(({ type }) => {
+  const options = types.map(({ type, label }) => {
     const handleClick = onClick && R.curry(onClick)(type)
 
-    const disabled = !!value && value !== type
+    const inactive = !!value && value !== type
 
     return (
       <Stack spacing={0} justifyContent="center" alignItems="center" key={type}>
@@ -27,10 +26,10 @@ export const OptionInputView = ({ types, value, onClick }: Props) => {
           fontSize="medium"
           outerBoxProps={{ sx: outerBoxStyle }}
           innerBoxProps={{ sx: innerBoxStyle, onClick: handleClick }}
-          disabled={disabled}
+          inactive={inactive}
         />
         <Box component="span" sx={boxStyle}>
-          {capitalizeFirstLetter(type)}
+          {label}
         </Box>
       </Stack>
     )
@@ -41,7 +40,7 @@ export const OptionInputView = ({ types, value, onClick }: Props) => {
       direction="row"
       justifyContent="flext-start"
       alignItems="flex-start"
-      spacing={0.5}
+      spacing={1}
     >
       {options}
     </Stack>

@@ -16,13 +16,13 @@ import { MoreFiltersInput } from './components/more-filters-input'
 
 const searchAutocompleteItems: Item[] = [
   {
-    label: 'Party',
-    ID: 'TYPE',
+    label: 'Impreza',
+    ID: 'TYP',
     type: 'trip',
   },
   {
-    label: 'Trip',
-    ID: 'TYPE',
+    label: 'Wycieczka',
+    ID: 'TYP',
     type: 'party',
   },
 ]
@@ -95,12 +95,15 @@ const voivodeships = [
 const options: Type[] = [
   {
     type: 'all',
+    label: 'Wszystko',
   },
   {
     type: 'trip',
+    label: 'Wycieczka',
   },
   {
     type: 'party',
+    label: 'Impreza',
   },
 ]
 

@@ -1,3 +1,9 @@
+# Dependency files/directories
 node_modules/
+
+# Gatsby files/directories
 .cache/
-public
+public/
+
+# Config files/directories
+.env.*

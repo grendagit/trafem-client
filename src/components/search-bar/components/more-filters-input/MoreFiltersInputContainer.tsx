@@ -6,7 +6,7 @@ import { getNumberOfFilters } from './more-filters-input.helpers'
 type ViewProps = ComponentProps<typeof MoreFiltersInputView>
 type Props = Omit<ViewProps, 'numberOfFilters'> & {
   sliderProps?: Pick<
-    Exclude<ViewProps['sliderProps'], undefined>,
+    NonNullable<ViewProps['sliderProps']>,
     'min' | 'max' | 'step'
   >
 }
@@ -14,9 +14,8 @@ type Props = Omit<ViewProps, 'numberOfFilters'> & {
 export const MoreFiltersInputContainer = ({ sliderProps, ...rest }: Props) => {
   const [value, setValue] = useState<number[] | null>(null)
 
-  const handleChangeCommited: Exclude<
-    ViewProps['sliderProps'],
-    undefined
+  const handleChangeCommited: NonNullable<
+    ViewProps['sliderProps']
   >['onChangeCommitted'] = (_, newValue) => setValue(newValue as number[])
 
   return (

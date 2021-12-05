@@ -11,10 +11,8 @@ export const MoreFiltersSliderContainer = ({
 }: Props) => {
   const [value, setValue] = useState<number[]>([min, max])
 
-  const handleChange: Exclude<ViewProps['onChange'], undefined> = (
-    _,
-    newValue
-  ) => setValue(newValue as number[])
+  const handleChange: NonNullable<ViewProps['onChange']> = (_, newValue) =>
+    setValue(newValue as number[])
 
   return (
     <MoreFiltersSliderView

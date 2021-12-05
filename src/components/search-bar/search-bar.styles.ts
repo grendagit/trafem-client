@@ -5,7 +5,7 @@ const commonStyle = {
 }
 
 export const stackStyle = {
-  ...tw`px-6 py-6`,
+  ...tw`px-6 py-4`,
 }
 export const boxStyle = {
   ...commonStyle,

@@ -12,7 +12,7 @@ import {
 type PrimarySliderProps = ComponentProps<typeof PrimarySlider>
 type Props = PrimarySliderProps & {
   value: number[]
-  onChange: Exclude<PrimarySliderProps['onChange'], undefined>
+  onChange: NonNullable<PrimarySliderProps['onChange']>
 }
 
 export const MoreFiltersSliderView = ({ value, ...rest }: Props) => {

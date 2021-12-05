@@ -48,7 +48,7 @@ export const options = {
 
 type Props = {
   type: Keys
-  disabled?: boolean
+  inactive?: boolean
   outerBoxProps?: BoxProps
   innerBoxProps?: BoxProps
   fontSize?: SvgIconProps['fontSize']
@@ -56,12 +56,12 @@ type Props = {
 
 export const OptionView = ({
   type,
-  disabled = false,
+  inactive = false,
   outerBoxProps: { sx: outerBoxSx, ...restOuterBox } = {},
   innerBoxProps: { sx: innerBoxSx, ...restInnerBox } = {},
   fontSize = 'small',
 }: Props) => {
-  const { from, to, alpha } = disabled ? inactiveColors : options[type]
+  const { from, to, alpha } = inactive ? inactiveColors : options[type]
   const { Icon } = options[type]
 
   return (

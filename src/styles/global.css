@@ -1,7 +1,14 @@
+/* Tailwind CSS */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* Mapbox */
+@import 'mapbox-gl/dist/mapbox-gl.css';
+/* Mapbox override */
+@import './exceptions/mapbox-gl.css';
+
+/* Custom */
 html {
   @apply box-border;
 }
@@ -11,6 +18,13 @@ html {
   box-sizing: inherit;
 }
 
-* {
-  @apply font-sans;
+#root {
+  @apply flex flex-col h-screen;
+}
+main {
+  @apply flex flex-1;
+}
+
+body {
+  @apply bg-white font-sans text-gray-800;
 }

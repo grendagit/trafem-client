@@ -1,0 +1,15 @@
+.mapboxgl-popup-content {
+  @apply rounded-none p-0 bg-transparent shadow-none;
+}
+
+.mapboxgl-popup-list {
+  &::-webkit-scrollbar {
+    @apply w-2;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply h-24 rounded-full bg-gray-200;
+  }
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+}

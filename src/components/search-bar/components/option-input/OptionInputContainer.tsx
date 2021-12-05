@@ -9,7 +9,7 @@ type Props = Omit<ViewProps, 'value' | 'onClick'>
 export const OptionInputContainer = (props: Props) => {
   const [value, setValue] = useState<Type['type'] | null>(null)
 
-  const handleClick: Exclude<ViewProps['onClick'], undefined> = (type, _) => {
+  const handleClick: NonNullable<ViewProps['onClick']> = (type, _) => {
     const newValue = type === 'all' ? null : type
     setValue(newValue)
   }
