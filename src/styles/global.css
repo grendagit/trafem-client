@@ -8,7 +8,7 @@
 /* Mapbox override */
 @import './exceptions/mapbox-gl.css';
 
-/* Custom */
+/* Global custom */
 html {
   @apply box-border;
 }

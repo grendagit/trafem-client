@@ -7,8 +7,8 @@ const gatsbyConfig: GatsbyConfig = {
   },
   plugins: [
     'gatsby-plugin-postcss',
-    'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-emotion',
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {

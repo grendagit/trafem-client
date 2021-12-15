@@ -1,14 +1,16 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import { TestID } from '../../types/test.type'
+import type { TTestID } from '../../types/test.type'
 
-type Props = TestID
+import { Box } from '@mui/material'
+
+type Props = TTestID
 
 export const LogoView = (props: Props) => {
   return (
-    <div {...props}>
-      <Link to="/">Logo</Link>
-    </div>
+    <Box {...props}>
+      <Link to="/"></Link>
+    </Box>
   )
 }

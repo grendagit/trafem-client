@@ -1,1 +1,0 @@
-import './src/gatsby/browser'

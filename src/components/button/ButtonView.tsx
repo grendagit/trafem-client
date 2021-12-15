@@ -3,7 +3,8 @@ import React from 'react'
 import { buttonStyle } from './button.styles'
 import { prepareStyles } from '../../helpers/prepare-styles.helper'
 
-import { Button, ButtonProps } from '@mui/material'
+import { Button } from '@mui/material'
+import type { ButtonProps } from '@mui/material'
 
 type Props = ButtonProps
 

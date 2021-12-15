@@ -2,28 +2,30 @@ import React, { useMemo, useCallback } from 'react'
 
 import { MapView } from '../../MapView'
 import {
+  addLayerListenersAssociatedWithPopup,
   addPopupListeners,
   createGeoJSONObject,
   getUpdateMarkers,
 } from './map-with-clusters.helpers'
-import { Material } from './map-with-clusters.types'
+import type { TMapMaterial } from './map-with-clusters.types'
 
-import { Popup, PopupOptions, GeoJSONSourceRaw } from 'mapbox-gl'
+import { Popup } from 'mapbox-gl'
+import type { PopupOptions, GeoJSONSourceRaw } from 'mapbox-gl'
 
 type Props = {
-  materials?: Material[]
+  mapMaterials?: TMapMaterial[]
   sourceOptions?: Omit<GeoJSONSourceRaw, 'type' | 'data' | 'cluster'>
   popupOptions?: Omit<PopupOptions, 'anchor' | 'closeButton'>
 }
 
 export const MapWithClustersView = ({
-  materials = [],
+  mapMaterials = [],
   sourceOptions,
   popupOptions,
 }: Props) => {
   const information = useMemo(
     () =>
-      materials.map(({ mapMarkers, ...rest }) => ({
+      mapMaterials.map(({ mapMarkers, ...rest }) => ({
         features: mapMarkers.map(createGeoJSONObject),
         ...rest,
       })),
@@ -39,9 +41,12 @@ export const MapWithClustersView = ({
       offset: 25,
       ...popupOptions,
     })
+    addPopupListeners(popup, map)
 
     information.map(({ sourceID, features, type }) => {
-      // adds a clustered GeoJSON source
+      /**
+       * adds a clustered GeoJSON source
+       */
       map.addSource(sourceID, {
         type: 'geojson',
         data: {
@@ -62,7 +67,9 @@ export const MapWithClustersView = ({
         unclustered: '!has',
         clustered: 'has',
       }
-      // layers for rendering clustered and unclustered points
+      /**
+       * layers for rendering clustered and unclustered points
+       */
       Object.entries(layerIDs).forEach(([key, layerID]) => {
         const existentialFilter =
           layerExistentialFilters[key as keyof typeof layerIDs]
@@ -78,9 +85,11 @@ export const MapWithClustersView = ({
         })
       })
 
-      addPopupListeners(sourceID, layerIDs, type, popup, map)
+      addLayerListenersAssociatedWithPopup(sourceID, layerIDs, type, popup, map)
 
-      // after the GeoJSON data is loaded, updates markers on the screen on every frame
+      /**
+       * after the GeoJSON data is loaded, updates markers on the screen on every frame
+       */
       const updateMarkers = getUpdateMarkers()
       map.on('render', () => {
         if (map.isSourceLoaded(sourceID)) {

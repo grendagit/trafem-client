@@ -3,7 +3,8 @@ import React from 'react'
 import { paperStyle } from './popover.style'
 import { prepareStyles } from '../../helpers/prepare-styles.helper'
 
-import { Popover, PopoverProps } from '@mui/material'
+import { Popover } from '@mui/material'
+import type { PopoverProps } from '@mui/material'
 
 type Props = PopoverProps
 
@@ -14,6 +15,7 @@ export const PopoverView = ({
 }: Props) => {
   return (
     <Popover
+      transitionDuration={0}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'center',
@@ -23,7 +25,7 @@ export const PopoverView = ({
         horizontal: 'center',
       }}
       PaperProps={{
-        elevation: 3,
+        elevation: 2,
         sx: prepareStyles(paperStyle, paperSx),
         ...paperRest,
       }}

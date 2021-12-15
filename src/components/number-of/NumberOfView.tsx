@@ -3,7 +3,8 @@ import React from 'react'
 import { boxStyle } from './number-of.styles'
 import { prepareStyles } from '../../helpers/prepare-styles.helper'
 
-import { Box, BoxProps } from '@mui/material'
+import { Box } from '@mui/material'
+import type { BoxProps } from '@mui/material'
 
 type Props = {
   number: number

@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
 
 import { transformCenter } from './map.helpers'
-import { boxMapContainerStyle, boxStyle } from './map.styles'
+import { boxStyle, mapContainerBoxStyle } from './map.styles'
 
-import {
-  Map,
-  LngLatBoundsLike,
+import { Map } from 'mapbox-gl'
+import type {
+  MapboxOptions,
   MapEventType,
   EventData,
-  MapboxOptions,
+  LngLatBoundsLike,
 } from 'mapbox-gl'
 import { Box } from '@mui/material'
 
@@ -28,7 +28,9 @@ export const MapView = ({ mapOptions, onLoad }: Props) => {
   const mapContainerRef = useRef<HTMLElement | string>(null!)
   const mapRef = useRef<Map>(null!)
 
-  // initializes the map
+  /**
+   * initializes the map
+   */
   useEffect(() => {
     mapRef.current = new Map({
       container: mapContainerRef.current,
@@ -46,9 +48,13 @@ export const MapView = ({ mapOptions, onLoad }: Props) => {
     if (onLoad) {
       map.on('load', onLoad)
     }
+
+    return () => map.remove()
   }, [])
 
-  // stores the new coords
+  /**
+   * stores the new coords
+   */
   useEffect(() => {
     if (mapRef.current) {
       const map = mapRef.current
@@ -68,7 +74,7 @@ export const MapView = ({ mapOptions, onLoad }: Props) => {
 
   return (
     <Box sx={boxStyle}>
-      <Box ref={mapContainerRef} sx={boxMapContainerStyle} />
+      <Box ref={mapContainerRef} sx={mapContainerBoxStyle} />
     </Box>
   )
 }

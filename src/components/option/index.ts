@@ -1,2 +1,2 @@
 export { OptionView as Option } from './OptionView'
-export type { Keys } from './option.types'
+export type { TType } from './option.types'

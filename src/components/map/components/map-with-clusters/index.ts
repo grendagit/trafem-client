@@ -1,5 +1,5 @@
 export { MapWithClustersView as MapWithClusters } from './MapWithClustersView'
 export type {
-  MapMarker,
-  MapGeoJSONFeaturePointNonNullableGeoJsonProperties,
+  TMapMarker,
+  MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties,
 } from './map-with-clusters.types'

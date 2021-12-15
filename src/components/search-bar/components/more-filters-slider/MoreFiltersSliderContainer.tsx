@@ -1,4 +1,6 @@
-import React, { useState, ComponentProps } from 'react'
+import React, { useState } from 'react'
+import type { ComponentProps } from 'react'
+
 import { MoreFiltersSliderView } from './MoreFiltersSliderView'
 
 type ViewProps = ComponentProps<typeof MoreFiltersSliderView>

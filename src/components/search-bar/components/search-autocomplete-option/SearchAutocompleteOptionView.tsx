@@ -1,15 +1,16 @@
 import React from 'react'
 
 import { Indentifier } from '../indentifier'
-import { Keys, Option } from '../../../option'
-import { stackStyle } from './search-autocomplete-option.styles'
+import { Option } from '../../../option'
+import type { TType as TOptionType } from '../../../option'
 
-import { Box, BoxProps, Stack } from '@mui/material'
+import { Box, Stack } from '@mui/material'
+import type { BoxProps } from '@mui/material'
 
 type Props = {
   label: string
   ID: string
-  type: Keys
+  type: TOptionType
   liProps: React.HTMLAttributes<HTMLLIElement>
   boxProps?: BoxProps
 }
@@ -25,10 +26,10 @@ export const SearchAutocompleteOptionView = ({
     <Box component="li" {...liProps} {...boxProps}>
       <Option type={type} />
       <Stack
-        spacing={0}
         justifyContent="flex-start"
         alignItems="flex-start"
-        sx={stackStyle}
+        spacing={0}
+        marginLeft={0.5}
       >
         <Box component="span">{label}</Box>
         <Indentifier identifier={ID} />

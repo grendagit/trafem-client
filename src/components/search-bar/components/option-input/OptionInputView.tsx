@@ -1,26 +1,30 @@
 import React from 'react'
 
 import { Option } from '../../../option'
-import { OnClick, Type } from './option-input.types'
-import { boxStyle, innerBoxStyle, outerBoxStyle } from './option-input.styles'
+import type { TOnClick, TMaterial } from './option-input.types'
+import {
+  outerBoxStyle,
+  innerBoxStyle,
+  paragraphBoxStyle,
+} from './option-input.styles'
 
 import { Stack, Box } from '@mui/material'
 import * as R from 'ramda'
 
 type Props = {
-  types: Type[]
-  value?: Type['type'] | null
-  onClick?: OnClick
+  materials: TMaterial[]
+  value?: TMaterial['type'] | null
+  onClick?: TOnClick
 }
 
-export const OptionInputView = ({ types, value, onClick }: Props) => {
-  const options = types.map(({ type, label }) => {
+export const OptionInputView = ({ materials, value, onClick }: Props) => {
+  const options = materials.map(({ type, label }) => {
     const handleClick = onClick && R.curry(onClick)(type)
 
     const inactive = !!value && value !== type
 
     return (
-      <Stack spacing={0} justifyContent="center" alignItems="center" key={type}>
+      <Stack justifyContent="center" alignItems="center" spacing={0} key={type}>
         <Option
           type={type}
           fontSize="medium"
@@ -28,7 +32,7 @@ export const OptionInputView = ({ types, value, onClick }: Props) => {
           innerBoxProps={{ sx: innerBoxStyle, onClick: handleClick }}
           inactive={inactive}
         />
-        <Box component="span" sx={boxStyle}>
+        <Box component="p" sx={paragraphBoxStyle}>
           {label}
         </Box>
       </Stack>

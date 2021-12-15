@@ -1,3 +1,3 @@
 import { options } from './OptionView'
 
-export type Keys = keyof typeof options
+export type TType = keyof typeof options

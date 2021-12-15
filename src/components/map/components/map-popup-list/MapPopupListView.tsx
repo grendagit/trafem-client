@@ -1,10 +1,11 @@
 import React from 'react'
 
 import { paperStyle } from './map-popup-list.styles'
-import { MapGeoJSONFeaturePointNonNullableGeoJsonProperties } from '../map-with-clusters'
+import type { MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties } from '../map-with-clusters'
 
 import { Paper, ListItem } from '@mui/material'
-import { FixedSizeList, ListChildComponentProps } from 'react-window'
+import { FixedSizeList } from 'react-window'
+import type { ListChildComponentProps } from 'react-window'
 
 const renderItem = ({ index, style }: ListChildComponentProps) => {
   return (
@@ -15,12 +16,12 @@ const renderItem = ({ index, style }: ListChildComponentProps) => {
 }
 
 type Props = {
-  features: MapGeoJSONFeaturePointNonNullableGeoJsonProperties[]
+  features: MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties[]
 }
 
 export const MapPopupListView = ({ features }: Props) => {
   return (
-    <Paper elevation={3} sx={paperStyle}>
+    <Paper elevation={2} sx={paperStyle}>
       <FixedSizeList
         itemData={features}
         itemCount={features.length}

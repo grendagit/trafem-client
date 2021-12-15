@@ -2,11 +2,11 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 
 import { NavigationView } from '../NavigationView'
-import { Route } from '../navigation.types'
+import type { TRoute } from '../navigation.types'
 
 describe('Navigation component', () => {
   const testID = 'navigation'
-  const mockRoutes: Route[] = [
+  const mockRoutes: TRoute[] = [
     {
       path: 'mockPath',
       text: 'mockText',

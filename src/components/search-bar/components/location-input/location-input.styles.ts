@@ -1,15 +1,15 @@
 import tw from 'twin.macro'
 
-const commonStyle = {
-  ...tw`flex justify-start items-center px-0 font-medium`,
+const buttonCommonStyle = {
+  ...tw`flex justify-start items-center px-0 font-normal`,
 }
 
 export const popoverCustomButtonStyle = {
   ...tw`cursor-default`,
-  ...commonStyle,
+  ...buttonCommonStyle,
 }
 export const popoverExpandMoreButtonStyle = {
-  ...commonStyle,
+  ...buttonCommonStyle,
 }
 export const popoverExpandMoreButtonEndIconStyle = {
   ...tw`text-current`,

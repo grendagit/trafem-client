@@ -1,8 +1,8 @@
-export type Voivodeship = {
+export type TRegion = {
   name: string
   cities: string[]
 }
-export type OnClick = (
+export type TOnClick = (
   location: string,
   event: React.MouseEvent<HTMLButtonElement, MouseEvent>
 ) => void

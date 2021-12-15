@@ -1,4 +1,5 @@
-import React, { ComponentProps } from 'react'
+import React from 'react'
+import type { ComponentProps } from 'react'
 
 import { ButtonView } from '../../ButtonView'
 import { OutlinedPrimaryButton } from '../outlined-primary'
@@ -7,7 +8,8 @@ import { buttonStyle, endIconStyle } from './expand-more.styles'
 import { prepareStyles } from '../../../../helpers/prepare-styles.helper'
 import ExpandArrow from '../../../../assets/svg/icons/expand-arrow.inline.svg'
 
-import { SvgIconProps, SvgIcon } from '@mui/material'
+import { SvgIcon } from '@mui/material'
+import type { SvgIconProps } from '@mui/material'
 
 const Components = {
   text: TextPrimaryButton,

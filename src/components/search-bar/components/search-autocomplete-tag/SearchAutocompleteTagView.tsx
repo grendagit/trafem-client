@@ -4,7 +4,8 @@ import { chipStyle } from './search-autocomplete-tag.styles'
 import { prepareStyles } from '../../../../helpers/prepare-styles.helper'
 import Close from '../../../../assets/svg/icons/close.inline.svg'
 
-import { Chip, ChipProps, IconButton, SvgIcon } from '@mui/material'
+import { Chip, IconButton, SvgIcon } from '@mui/material'
+import type { ChipProps } from '@mui/material'
 
 type Props = ChipProps
 

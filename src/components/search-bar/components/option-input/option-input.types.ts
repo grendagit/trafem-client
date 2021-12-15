@@ -1,10 +1,10 @@
-import { Keys } from '../../../option'
+import type { TType as TOptionType } from '../../../option'
 
-export type Type = {
-  type: Keys
+export type TMaterial = {
+  type: TOptionType
   label: string
 }
-export type OnClick = (
-  type: Type['type'],
+export type TOnClick = (
+  type: TMaterial['type'],
   event: React.MouseEvent<HTMLDivElement, MouseEvent>
 ) => void
