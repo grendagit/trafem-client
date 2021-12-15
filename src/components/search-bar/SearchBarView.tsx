@@ -2,12 +2,13 @@ import React from 'react'
 
 import { Item, SearchAutocomplete } from './components/search-autocomplete'
 import { LocationInput } from './components/location-input'
-import { Type, OptionInput } from './components/option-input'
+import { OptionInput } from './components/option-input'
+import type { TMaterial as TOptionInputMaterial } from './components/option-input'
 import {
-  boxStyle,
-  optionInputBoxStyle,
   searchAutocompleteBoxStyle,
-  stackStyle,
+  locationInputBoxStyle,
+  optionInputBoxStyle,
+  moreFiltersInputBoxStyle,
 } from './search-bar.styles'
 
 import { Box, Stack } from '@mui/material'
@@ -26,7 +27,7 @@ const searchAutocompleteItems: Item[] = [
     type: 'party',
   },
 ]
-const voivodeships = [
+const localInputRegions = [
   {
     name: 'dolnośląskie',
     cities: ['Wrocław'],
@@ -92,7 +93,7 @@ const voivodeships = [
     cities: ['Szczecin'],
   },
 ]
-const options: Type[] = [
+const optionInputMaterials: TOptionInputMaterial[] = [
   {
     type: 'all',
     label: 'Wszystko',
@@ -116,7 +117,7 @@ export const SearchBarView = () => {
       justifyContent="flex-start"
       alignItems="flex-start"
       spacing={2}
-      sx={stackStyle}
+      padding={2}
     >
       <Box sx={searchAutocompleteBoxStyle}>
         <SearchAutocomplete
@@ -124,13 +125,13 @@ export const SearchBarView = () => {
           getItemLabel={getSearchAutomcompleteItemLabel}
         />
       </Box>
-      <Box sx={boxStyle}>
-        <LocationInput regions={voivodeships} />
+      <Box sx={locationInputBoxStyle}>
+        <LocationInput regions={localInputRegions} />
       </Box>
       <Box sx={optionInputBoxStyle}>
-        <OptionInput types={options} />
+        <OptionInput materials={optionInputMaterials} />
       </Box>
-      <Box sx={boxStyle}>
+      <Box sx={moreFiltersInputBoxStyle}>
         <MoreFiltersInput sliderProps={{ max: 100000, step: 1000 }} />
       </Box>
     </Stack>

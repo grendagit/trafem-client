@@ -1,8 +1,7 @@
 const { colors } = require('./src/styles/common')
 
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       borderColor: {
@@ -11,9 +10,12 @@ module.exports = {
       backgroundColor: {
         'ghost-white': colors['ghost-white'],
         'venetian-red': colors['venetian-red'],
+        'mystic-maroon': colors['mystic-maroon'],
       },
       textColor: {
         crayola: colors.crayola,
+        'mystic-maroon': colors['mystic-maroon'],
+        'venetian-red': colors['venetian-red'],
       },
       fontSize: {
         '3xs': ['0.5rem', '1rem'],
@@ -21,6 +23,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Roboto', 'Tahoma', 'Verdana', 'sans-serif'],
+      },
+      height: {
+        7.5: '1.875rem',
       },
       width: {
         112: '28rem',
@@ -32,6 +37,9 @@ module.exports = {
       },
       maxWidth: {
         '1/2': '50%',
+      },
+      zIndex: {
+        '-10': '-10',
       },
     },
   },

@@ -3,22 +3,23 @@ import ReactDOM from 'react-dom'
 
 import { MapMarker as CustomMarker } from '../map-marker'
 import { MapPopupList as CustomPopupList } from '../map-popup-list'
-import { Keys } from '../../../option'
-import {
-  MapGeoJSONFeaturePointNonNullableGeoJsonProperties,
+import type { TType as TOptionType } from '../../../option'
+import type {
+  TMapMarker,
   FeatureNonNullableGeoJsonProperties,
-  MapMarker,
+  MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties,
   PopupWithAssociatedID,
 } from './map-with-clusters.types'
-import { Generic } from '../../../../types/generic.type'
+import type { Generic } from '../../../../types/generic.type'
 
-import { LngLatLike, Map, GeoJSONSource, Marker } from 'mapbox-gl'
+import { Map, GeoJSONSource, Marker } from 'mapbox-gl'
+import type { LngLatLike } from 'mapbox-gl'
 
 export function createGeoJSONObject({
   longitude,
   latitude,
   ...rest
-}: MapMarker): FeatureNonNullableGeoJsonProperties {
+}: TMapMarker): FeatureNonNullableGeoJsonProperties {
   return {
     type: 'Feature',
     properties: {
@@ -34,17 +35,17 @@ export function createGeoJSONObject({
 
 function getCoords({
   geometry: { coordinates },
-}: MapGeoJSONFeaturePointNonNullableGeoJsonProperties) {
+}: MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties) {
   return coordinates as LngLatLike
 }
 
-function createID(ID: number, type: Keys, unclustered: boolean): string {
+function createID(ID: number, type: TOptionType, unclustered: boolean): string {
   const prefix = unclustered ? 'unclustered' : 'clustered'
   return `${prefix}-${type}-${ID}`
 }
 
 function createHTMLPopupContentObject(
-  features: MapGeoJSONFeaturePointNonNullableGeoJsonProperties[]
+  features: MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties[]
 ) {
   const HTMLPopupContentObject = <CustomPopupList features={features} />
 
@@ -54,39 +55,20 @@ function createHTMLPopupContentObject(
   return el
 }
 
-export function addPopupListeners(
+export function addLayerListenersAssociatedWithPopup(
   sourceID: string,
   layerIDs: {
     clustered: string
     unclustered: string
   },
-  type: Keys,
+  type: TOptionType,
   popup: PopupWithAssociatedID,
   map: Map
 ): void {
-  popup.on('open', event => {
-    const assertedEvent = event as Generic
-    const popup = assertedEvent.target
-
-    const point = map.project([popup._lngLat.lng, popup._lngLat.lat])
-    point.y -= popup._container.clientHeight / 2
-    map.panTo(map.unproject(point))
-  })
-
-  popup.on('remove', event => {
-    const assertedEvent = event as Generic
-    const popup = assertedEvent.target
-
-    if (assertedEvent.associatedID === popup.associatedID) {
-      popup.remove()
-      popup.associatedID = null
-    }
-  })
-
   map.on('click', layerIDs.unclustered, event => {
     const map = event.target
     const feature = (
-      event.features as MapGeoJSONFeaturePointNonNullableGeoJsonProperties[]
+      event.features as MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties[]
     )[0]
 
     const coords = getCoords(feature)
@@ -108,21 +90,21 @@ export function addPopupListeners(
   map.on('click', layerIDs.clustered, async event => {
     const map = event.target
     const feature = (
-      event.features as MapGeoJSONFeaturePointNonNullableGeoJsonProperties[]
+      event.features as MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties[]
     )[0]
 
     const { cluster_id: clusterID, point_count: pointCount } =
       feature.properties
     const source = map.getSource(sourceID) as GeoJSONSource
     const clusterLeaves = await new Promise<
-      MapGeoJSONFeaturePointNonNullableGeoJsonProperties[]
+      MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties[]
     >((resolve, reject) =>
       source.getClusterLeaves(clusterID, pointCount, 0, (error, features) => {
         if (error) {
           reject(error)
         }
         resolve(
-          features as MapGeoJSONFeaturePointNonNullableGeoJsonProperties[]
+          features as MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties[]
         )
       })
     )
@@ -137,10 +119,34 @@ export function addPopupListeners(
   })
 }
 
+export function addPopupListeners(
+  popup: PopupWithAssociatedID,
+  map: Map
+): void {
+  popup.on('open', event => {
+    const assertedEvent = event as Generic
+    const popup = assertedEvent.target
+
+    const point = map.project([popup._lngLat.lng, popup._lngLat.lat])
+    point.y -= popup._container.clientHeight / 2
+    map.panTo(map.unproject(point))
+  })
+
+  popup.on('remove', event => {
+    const assertedEvent = event as Generic
+    const popup = assertedEvent.target
+
+    if (assertedEvent.associatedID === popup.associatedID) {
+      popup.remove()
+      popup.associatedID = null
+    }
+  })
+}
+
 function createHTMLMarkerObject(
   { point_count: pointCount }: Generic,
-  type: Keys
-) {
+  type: TOptionType
+): HTMLDivElement {
   const HTMLMarkerObject = <CustomMarker type={type} pointCount={pointCount} />
 
   const el = document.createElement('div')
@@ -149,15 +155,25 @@ function createHTMLMarkerObject(
   return el
 }
 
-// provides state to update markers
-export function getUpdateMarkers() {
-  // objects for caching and keeping track of HTML marker objects
+/**
+ * provides state to update markers
+ * @returns update markers function
+ */
+export function getUpdateMarkers(): (
+  sourceID: string,
+  type: TOptionType,
+  popup: PopupWithAssociatedID,
+  map: Map
+) => void {
+  /**
+   * objects for caching and keeping track of HTML marker objects
+   */
   const markers: Generic = {}
   let markersOnScreen: Generic = {}
 
   function updateMarkers(
     sourceID: string,
-    type: Keys,
+    type: TOptionType,
     popup: PopupWithAssociatedID,
     map: Map
   ) {
@@ -165,9 +181,11 @@ export function getUpdateMarkers() {
 
     const features = map.querySourceFeatures(
       sourceID
-    ) as MapGeoJSONFeaturePointNonNullableGeoJsonProperties[]
+    ) as MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties[]
 
-    // for every cluster on the screen, creates an HTML marker for it, and adds it to the map if it's not there already
+    /**
+     * for every cluster on the screen, creates an HTML marker for it, and adds it to the map if it's not there already
+     */
     for (const feature of features) {
       const {
         cluster_id: clusterID,

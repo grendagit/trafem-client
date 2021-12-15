@@ -1,14 +1,16 @@
-import React, { forwardRef, ComponentProps } from 'react'
+import React, { forwardRef } from 'react'
+import type { ComponentProps } from 'react'
 
 import { FilledPrimaryInput } from '../../../input'
 import {
   inputStyle,
-  startAdornmentStyle,
+  inputStartAdornmentStyle,
+  inputBoxStyle,
 } from './search-autocomplete-input.styles'
 import { prepareStyles } from '../../../../helpers/prepare-styles.helper'
 import Search from '../../../../assets/svg/icons/search.inline.svg'
 
-import { IconButton, SvgIcon } from '@mui/material'
+import { IconButton, InputAdornment, SvgIcon, Box } from '@mui/material'
 
 type Props = ComponentProps<typeof FilledPrimaryInput>
 
@@ -20,9 +22,12 @@ export const SearchAutocompleteInputView = forwardRef(
         placeholder="Szukaj"
         startAdornment={
           <>
-            <IconButton disabled size="small" sx={startAdornmentStyle}>
-              <SvgIcon component={Search} />
-            </IconButton>
+            <InputAdornment position="start">
+              <IconButton disabled edge="start" sx={inputStartAdornmentStyle}>
+                <SvgIcon component={Search} />
+              </IconButton>
+            </InputAdornment>
+            <Box component="span" sx={inputBoxStyle}></Box>
             {startAdornment}
           </>
         }

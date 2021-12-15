@@ -1,22 +1,24 @@
-import { Keys } from '../../../option'
+import type { TType as TOptionType } from '../../../option'
 
-import { MapboxGeoJSONFeature, Popup } from 'mapbox-gl'
-import { Feature, Point, GeoJsonProperties, Geometry } from 'geojson'
+import { Popup } from 'mapbox-gl'
+import type { MapboxGeoJSONFeature } from 'mapbox-gl'
+import type { Feature, Point, GeoJsonProperties, Geometry } from 'geojson'
 
-export type MapMarker = {
+export type TMapMarker = {
   ID: string | number
   longitude: number
   latitude: number
 }
-export type Material = {
+export type TMapMaterial = {
   sourceID: string
-  type: Keys
-  mapMarkers: MapMarker[]
+  type: TOptionType
+  mapMarkers: TMapMarker[]
 }
+
 export type FeatureNonNullableGeoJsonProperties<
   T extends Geometry | null = Point
 > = Feature<T, NonNullable<GeoJsonProperties>>
-export type MapGeoJSONFeaturePointNonNullableGeoJsonProperties<
+export type MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties<
   T extends Geometry = Point
 > = MapboxGeoJSONFeature & FeatureNonNullableGeoJsonProperties<T>
 export type PopupWithAssociatedID = Popup & { associatedID?: string }

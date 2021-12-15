@@ -3,7 +3,20 @@ node_modules/
 
 # Gatsby files/directories
 .cache/
-public/
+public
 
 # Config files/directories
-.env.*
+.env*
+
+# Mac files/directories
+.DS_Store
+
+# Visual Studio Code files/directories
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+# Local History for Visual Studio Code
+.history/

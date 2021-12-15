@@ -1,17 +1,18 @@
 import React from 'react'
 
-import { Option, Keys } from '../../../option'
+import { Option } from '../../../option'
+import type { TType as TOptionType } from '../../../option'
 import { NumberOf } from '../../../number-of'
 import {
+  outerBoxStyle,
   innerBoxStyle,
   numberOfStyle,
-  outerBoxStyle,
 } from './map-marker.styles'
 
 import { Box } from '@mui/material'
 
 type Props = {
-  type: Keys
+  type: TOptionType
   pointCount?: number
 }
 

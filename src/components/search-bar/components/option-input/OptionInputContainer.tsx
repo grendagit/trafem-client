@@ -1,13 +1,14 @@
-import React, { useState, ComponentProps } from 'react'
+import React, { useState } from 'react'
+import type { ComponentProps } from 'react'
 
 import { OptionInputView } from './OptionInputView'
-import { Type } from './option-input.types'
+import type { TMaterial } from './option-input.types'
 
 type ViewProps = ComponentProps<typeof OptionInputView>
 type Props = Omit<ViewProps, 'value' | 'onClick'>
 
 export const OptionInputContainer = (props: Props) => {
-  const [value, setValue] = useState<Type['type'] | null>(null)
+  const [value, setValue] = useState<TMaterial['type'] | null>(null)
 
   const handleClick: NonNullable<ViewProps['onClick']> = (type, _) => {
     const newValue = type === 'all' ? null : type

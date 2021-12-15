@@ -1,11 +1,12 @@
-import React, { ComponentProps } from 'react'
+import React from 'react'
+import type { ComponentProps } from 'react'
 
 import { PrimarySlider } from '../../../slider'
 import { Box } from '@mui/material'
 import { generateCost } from './more-filters-slider.helpers'
 import {
   fromToBoxStyle,
-  boxStyle,
+  displayBoxStyle,
   separatorBoxStyle,
 } from './more-filters-slider.styles'
 
@@ -20,9 +21,9 @@ export const MoreFiltersSliderView = ({ value, ...rest }: Props) => {
     <>
       <PrimarySlider value={value} {...rest} />
       <Box sx={fromToBoxStyle}>
-        <Box sx={boxStyle}>{generateCost('minimalnie', value[0])}</Box>
+        <Box sx={displayBoxStyle}>{generateCost('minimalnie', value[0])}</Box>
         <Box sx={separatorBoxStyle}>—</Box>
-        <Box sx={boxStyle}>{generateCost('maksymalnie', value[1])}</Box>
+        <Box sx={displayBoxStyle}>{generateCost('maksymalnie', value[1])}</Box>
       </Box>
     </>
   )

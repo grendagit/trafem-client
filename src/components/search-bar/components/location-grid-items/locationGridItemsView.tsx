@@ -1,14 +1,14 @@
 import React from 'react'
 
 import { OutlinedPrimaryButton } from '../../../button'
-import { OnClick } from '../location-input'
+import type { TOnClick } from '../location-input'
 
 import { Grid } from '@mui/material'
 import * as R from 'ramda'
 
 type Props = {
   names: string[]
-  onClick?: OnClick
+  onClick?: TOnClick
 }
 
 export const LocationGridItemsView = ({ names, onClick }: Props) => {

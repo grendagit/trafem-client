@@ -1,4 +1,5 @@
-import React, { useState, ComponentProps } from 'react'
+import React, { useState } from 'react'
+import type { ComponentProps } from 'react'
 
 import { SearchAutocompleteView } from './SearchAutocompleteView'
 

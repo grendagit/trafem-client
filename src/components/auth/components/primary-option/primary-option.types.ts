@@ -1,4 +1,4 @@
-export type Route = {
+export type TRoute = {
   path: string
   text: string
 }

@@ -1,6 +1,6 @@
-import { SxProps } from '@mui/system'
-import { Theme } from '@mui/material'
-import { TwStyle } from 'twin.macro'
+import type { SxProps } from '@mui/system'
+import type { Theme } from '@mui/material'
+import type { TwStyle } from 'twin.macro'
 import * as R from 'ramda'
 
 export function prepareStyles(

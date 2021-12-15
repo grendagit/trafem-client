@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { ExpandMoreButton, CustomButton } from '../../../button'
 import { CustomPopover } from '../../../popover'
 import { LocationGridItems } from '../location-grid-items'
-import { OnClick, Voivodeship } from './location-input.types'
+import type { TOnClick, TRegion } from './location-input.types'
 import {
   popoverCustomButtonStyle,
   popoverExpandMoreButtonStyle,
@@ -13,9 +13,9 @@ import {
 import { Grid, Collapse } from '@mui/material'
 
 type Props = {
-  regions: Voivodeship[]
+  regions: TRegion[]
   value?: string | null
-  onClick?: OnClick
+  onClick?: TOnClick
 }
 
 export const LocationInputView = ({ regions, value, onClick }: Props) => {
@@ -28,10 +28,10 @@ export const LocationInputView = ({ regions, value, onClick }: Props) => {
   const handlePopoverClose = () => setAnchorEl(null)
   const popoverOpen = !!anchorEl
 
-  const handleVoivodeshipsExpandMoreButtonClick = () =>
+  const handleExpandMoreButtonClickVoivodeshipsExpanded = () =>
     setVoivodeshipsExpanded(!voivodeshipsExpanded)
 
-  const handleGridItemClick: OnClick = (location, event) => {
+  const handleGridItemClick: TOnClick = (location, event) => {
     handlePopoverClose()
     onClick?.(location, event)
   }
@@ -70,14 +70,14 @@ export const LocationInputView = ({ regions, value, onClick }: Props) => {
               expanded={voivodeshipsExpanded}
               disableRipple
               endIconProps={{ sx: popoverExpandMoreButtonEndIconStyle }}
-              onClick={handleVoivodeshipsExpandMoreButtonClick}
+              onClick={handleExpandMoreButtonClickVoivodeshipsExpanded}
               sx={popoverExpandMoreButtonStyle}
             >
               Województwa
             </ExpandMoreButton>
           </Grid>
           <Grid item xs={12}>
-            <Collapse in={voivodeshipsExpanded}>
+            <Collapse timeout={0} in={voivodeshipsExpanded}>
               <LocationGridItems
                 names={voivodeships}
                 onClick={handleGridItemClick}

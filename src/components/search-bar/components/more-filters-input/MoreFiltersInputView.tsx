@@ -1,12 +1,13 @@
-import React, { useState, ComponentProps } from 'react'
+import React, { useState } from 'react'
+import type { ComponentProps } from 'react'
 
 import { CustomButton, OutlinedPrimaryButton } from '../../../button'
 import { CustomPopover } from '../../../popover'
 import { MoreFiltersSlider } from '../more-filters-slider'
 import { NumberOf } from '../../../number-of'
 import {
-  buttonStyle,
-  buttonEndIconStyle,
+  outlinedPrimaryButtonStyle,
+  outlinedPrimaryButtonEndIconStyle,
   popoverCustomButtonStyle,
   popoverPaperStyle,
 } from './more-filters-input.styles'
@@ -34,10 +35,12 @@ export const MoreFiltersInputView = ({
   return (
     <>
       <OutlinedPrimaryButton
-        endIcon={<SvgIcon component={Filter} sx={buttonEndIconStyle} />}
+        endIcon={
+          <SvgIcon component={Filter} sx={outlinedPrimaryButtonEndIconStyle} />
+        }
         onClick={handleExpandMoreButtonClick}
         fullWidth
-        sx={buttonStyle}
+        sx={outlinedPrimaryButtonStyle}
       >
         Więcej filtrów
         {!!numberOfFilters && <NumberOf number={numberOfFilters} />}

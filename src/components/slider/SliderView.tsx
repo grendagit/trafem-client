@@ -2,7 +2,8 @@ import React from 'react'
 
 import { prepareStyles } from '../../helpers/prepare-styles.helper'
 
-import { Slider, SliderProps } from '@mui/material'
+import { Slider } from '@mui/material'
+import type { SliderProps } from '@mui/material'
 
 type Props = SliderProps
 

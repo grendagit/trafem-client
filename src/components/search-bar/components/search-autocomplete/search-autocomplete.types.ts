@@ -1,8 +1,8 @@
-import { Keys } from '../../../option'
+import type { TType as TOptionType } from '../../../option'
 
 export type Item = {
   label: string
   ID: string
-  type: Keys
+  type: TOptionType
   [key: string]: any
 }

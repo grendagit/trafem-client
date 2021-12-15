@@ -1,13 +1,14 @@
 import React from 'react'
 
-import { Keys } from './option.types'
+import type { TType } from './option.types'
 import { outerBoxStyle, innerBoxStyle } from './option.styles'
 import { prepareStyles } from '../../helpers/prepare-styles.helper'
 import Confetti from '../../assets/svg/icons/confetti.inline.svg'
 import Beach from '../../assets/svg/icons/beach.inline.svg'
 import Literature from '../../assets/svg/icons/literature.inline.svg'
 
-import { Box, BoxProps, SvgIcon, SvgIconProps } from '@mui/material'
+import { Box, SvgIcon } from '@mui/material'
+import type { BoxProps, SvgIconProps } from '@mui/material'
 
 const inactiveColors = {
   from: '142 158 171',
@@ -40,7 +41,7 @@ export const options = {
 }
 
 type Props = {
-  type: Keys
+  type: TType
   inactive?: boolean
   outerBoxProps?: BoxProps
   innerBoxProps?: BoxProps
