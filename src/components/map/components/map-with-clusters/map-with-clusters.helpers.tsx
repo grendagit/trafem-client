@@ -73,15 +73,10 @@ export function addLayerListenersAssociatedWithPopup(
 
     const coords = getCoords(feature)
 
-    /**
-     * TODO: raplace HTMLPopupContentObject
-     */
-    const HTMLPopupContentObject = <h1>Hello World!</h1>
-
-    const el = document.createElement('div')
-    ReactDOM.render(HTMLPopupContentObject, el)
-
-    popup.setLngLat(coords).setDOMContent(el).addTo(map)
+    popup
+      .setLngLat(coords)
+      .setDOMContent(createHTMLPopupContentObject([feature]))
+      .addTo(map)
 
     const { id: justID } = feature.properties
     popup.associatedID = createID(justID, type, true)

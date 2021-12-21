@@ -1,37 +1,32 @@
 import React from 'react'
 
+import { MapPopupListItem } from '../map-popup-list-item'
 import { paperStyle } from './map-popup-list.styles'
 import type { MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties } from '../map-with-clusters'
 
-import { Paper, ListItem } from '@mui/material'
+import { Paper } from '@mui/material'
 import { FixedSizeList } from 'react-window'
-import type { ListChildComponentProps } from 'react-window'
-
-const renderItem = ({ index, style }: ListChildComponentProps) => {
-  return (
-    <ListItem component="div" style={style} key={index}>
-      {index}
-    </ListItem>
-  )
-}
 
 type Props = {
   features: MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties[]
 }
 
 export const MapPopupListView = ({ features }: Props) => {
+  const itemSize = 80
+  const itemCount = features.length
+
   return (
     <Paper elevation={2} sx={paperStyle}>
       <FixedSizeList
         itemData={features}
-        itemCount={features.length}
-        itemSize={40}
+        itemCount={itemCount}
+        itemSize={itemSize}
         overscanCount={5}
-        height={360}
+        height={Math.min(320, itemSize * itemCount)}
         width={225}
-        className="mapboxgl-popup-list"
+        className="scrollbar"
       >
-        {renderItem}
+        {MapPopupListItem}
       </FixedSizeList>
     </Paper>
   )

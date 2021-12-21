@@ -14,10 +14,10 @@ import { Box } from '@mui/material'
 
 type Props = {
   mapOptions?: Omit<MapboxOptions, 'container'>
-  onLoad?: (event: MapEventType['load'] & EventData) => void
+  onInitialize?: (event: MapEventType['load'] & EventData) => void
 }
 
-export const MapView = ({ mapOptions, onLoad }: Props) => {
+export const MapView = ({ mapOptions, onInitialize }: Props) => {
   const [lng, setLng] = useState<number>(19.30063630556)
   const [lat, setLat] = useState<number>(52.1246099075455)
   const [zoom, setZoom] = useState<number>(0)
@@ -45,12 +45,20 @@ export const MapView = ({ mapOptions, onLoad }: Props) => {
 
     const map = mapRef.current
 
-    if (onLoad) {
-      map.on('load', onLoad)
-    }
-
     return () => map.remove()
   }, [])
+
+  useEffect(() => {
+    if (mapRef.current) {
+      const map = mapRef.current
+
+      if (onInitialize) {
+        map.on('initialize', onInitialize)
+      }
+
+      map.fire('initialize')
+    }
+  }, [onInitialize])
 
   /**
    * stores the new coords

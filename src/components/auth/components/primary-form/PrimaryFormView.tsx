@@ -8,9 +8,9 @@ import type { TField } from './primary-form.types'
 import {
   paperStyle,
   headerBoxStyle,
-  titleBoxStyle,
-  subtitleBoxStyle,
-  inputErrorBoxStyle,
+  titleStyle,
+  subtitleStyle,
+  inputErrorStyle,
   submitButtonBoxStyle,
   submitButtonStyle,
 } from './primary-form.styles'
@@ -63,7 +63,7 @@ export const PrimaryFormView = <T extends FieldValues>({
           inputLabel={label}
           fullWidth
         />
-        <Box component="p" sx={inputErrorBoxStyle}>
+        <Box component="p" sx={inputErrorStyle}>
           {(errors as Partial<Record<string, FieldError>>)[id]?.message}
         </Box>
       </Fragment>
@@ -73,10 +73,10 @@ export const PrimaryFormView = <T extends FieldValues>({
   return (
     <Paper elevation={2} sx={paperStyle}>
       <Box sx={headerBoxStyle}>
-        <Box component="h1" sx={titleBoxStyle}>
+        <Box component="h1" sx={titleStyle}>
           {title}
         </Box>
-        <Box component="p" sx={subtitleBoxStyle}>
+        <Box component="p" sx={subtitleStyle}>
           {subtitle}
         </Box>
       </Box>

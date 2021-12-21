@@ -1,19 +1,10 @@
-import type { TType as TOptionType } from '../../../option'
-
 import { Popup } from 'mapbox-gl'
 import type { MapboxGeoJSONFeature } from 'mapbox-gl'
 import type { Feature, Point, GeoJsonProperties, Geometry } from 'geojson'
+import type { TEvent, TGroupedEvents } from '../../../../types/event.type'
 
-export type TMapMarker = {
-  ID: string | number
-  longitude: number
-  latitude: number
-}
-export type TMapMaterial = {
-  sourceID: string
-  type: TOptionType
-  mapMarkers: TMapMarker[]
-}
+export type TMapMarker = TEvent
+export type TMapMaterial = TGroupedEvents
 
 export type FeatureNonNullableGeoJsonProperties<
   T extends Geometry | null = Point

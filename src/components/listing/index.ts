@@ -1,1 +1,1 @@
-export { ListingView as Listing } from './ListingView'
+export { ListingContainer as Listing } from './ListingContainer'

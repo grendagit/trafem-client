@@ -28,3 +28,15 @@ main {
 body {
   @apply bg-white font-sans text-gray-800;
 }
+
+.scrollbar {
+  &::-webkit-scrollbar {
+    @apply w-2;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply h-24 rounded-full bg-gray-200;
+  }
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+}

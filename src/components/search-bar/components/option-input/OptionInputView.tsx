@@ -5,7 +5,7 @@ import type { TOnClick, TMaterial } from './option-input.types'
 import {
   outerBoxStyle,
   innerBoxStyle,
-  paragraphBoxStyle,
+  paragraphStyle,
 } from './option-input.styles'
 
 import { Stack, Box } from '@mui/material'
@@ -32,7 +32,7 @@ export const OptionInputView = ({ materials, value, onClick }: Props) => {
           innerBoxProps={{ sx: innerBoxStyle, onClick: handleClick }}
           inactive={inactive}
         />
-        <Box component="p" sx={paragraphBoxStyle}>
+        <Box component="p" sx={paragraphStyle}>
           {label}
         </Box>
       </Stack>

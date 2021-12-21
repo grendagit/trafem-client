@@ -8,13 +8,13 @@ export const paperStyle = {
 export const headerBoxStyle = {
   ...tw`mb-6 text-gray-800`,
 }
-export const titleBoxStyle = {
+export const titleStyle = {
   ...tw`text-2xl font-normal`,
 }
-export const subtitleBoxStyle = {
+export const subtitleStyle = {
   ...tw`text-lg font-light`,
 }
-export const inputErrorBoxStyle = {
+export const inputErrorStyle = {
   ...tw`text-venetian-red text-xs font-light`,
 }
 export const submitButtonBoxStyle = {
