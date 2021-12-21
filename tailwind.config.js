@@ -39,6 +39,7 @@ module.exports = {
         '1/2': '50%',
       },
       zIndex: {
+        '-1': '-1',
         '-10': '-10',
       },
     },
@@ -46,5 +47,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 }

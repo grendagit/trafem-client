@@ -31,6 +31,12 @@ const navigationRoutes: TRoute[] = [
     path: '/add-offer',
     text: 'Zamieść ofertę',
   },
+]
+
+const authenticatedNavigationRoutes: TRoute[] = [...navigationRoutes]
+
+const unautheticatedNavigationRoutes: TRoute[] = [
+  ...navigationRoutes,
   {
     path: '/auth/sign-in',
     text: 'Zaloguj się',
@@ -76,13 +82,21 @@ export const HeaderView = (props: Props) => {
           spacing={0.5}
         >
           <Box sx={navigationBoxStyle}>
-            <Navigation routes={navigationRoutes} />
+            <Navigation
+              routes={
+                isAuthenticated
+                  ? authenticatedNavigationRoutes
+                  : unautheticatedNavigationRoutes
+              }
+            />
           </Box>
           {isAuthenticated && <Account />}
         </Stack>
-        {isAuthenticated || (
-          <Divider orientation="vertical" sx={dividerStyle} />
-        )}
+        <>
+          {isAuthenticated || (
+            <Divider orientation="vertical" sx={dividerStyle} />
+          )}
+        </>
         <Box sx={menuIconButtonBoxStyle}>
           <IconButton sx={menuIconButtonStyle}>
             <SvgIcon component={Menu} />

@@ -1,11 +1,28 @@
+// Styles begin
 import '../styles/global.css'
 
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
+// Styles end
+
+import React from 'react'
+import { GatsbyBrowser } from 'gatsby'
+
+import { EventsContextProvider } from '../contexts'
 
 import Amplify from 'aws-amplify'
+
+export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
+  element,
+  props: { location },
+}) => {
+  if (['/'].includes(location.pathname)) {
+    return <EventsContextProvider>{element}</EventsContextProvider>
+  }
+  return element
+}
 
 Amplify.configure({
   Auth: {

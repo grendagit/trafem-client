@@ -12,7 +12,9 @@ type Props = {
 
 export const NavigationView = ({ routes, ...rest }: Props) => {
   const routeItems = routes.map(({ path, text }) => (
-    <Link to={path}>{text}</Link>
+    <Link to={path} key={path}>
+      {text}
+    </Link>
   ))
 
   return (

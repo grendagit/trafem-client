@@ -1,1 +1,1 @@
-require('./src/gatsby/browser')
+module.exports = require('./src/gatsby/browser')
