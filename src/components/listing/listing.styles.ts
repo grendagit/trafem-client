@@ -1,7 +1,7 @@
 import tw from 'twin.macro'
 
 export const boxStyle = {
-  ...tw`h-full w-full bg-ghost-white relative z-10`,
+  ...tw`h-full w-full relative z-10 bg-ghost-white`,
 }
 export const tabsBoxStyle = {
   ...tw`mb-4`,

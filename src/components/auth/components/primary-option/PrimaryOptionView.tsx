@@ -2,17 +2,9 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import type { TRoute } from './primary-option.types'
-import {
-  // dividerStyle,
-  optionPharsingStyle,
-  optionStackStyle,
-} from './primary-option.styles'
+import { optionPharsingStyle, optionStackStyle } from './primary-option.styles'
 
-import {
-  Stack,
-  Box,
-  // Divider
-} from '@mui/material'
+import { Stack, Box } from '@mui/material'
 
 type Props = {
   text: string
@@ -36,7 +28,6 @@ export const PrimaryOptionView = ({ text, route }: Props) => {
           </Box>
         </Link>
       </Box>
-      {/* <Divider sx={dividerStyle} /> */}
     </Stack>
   )
 }

@@ -10,7 +10,8 @@ import '@fontsource/roboto/700.css'
 import React from 'react'
 import { GatsbyBrowser } from 'gatsby'
 
-import { EventsContextProvider } from '../contexts'
+import { CommonLayout } from '../layouts/common'
+import { AuthContextProvider, EventsContextProvider } from '../contexts'
 
 import Amplify from 'aws-amplify'
 
@@ -18,10 +19,11 @@ export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
   element,
   props: { location },
 }) => {
+  let component = element
   if (['/'].includes(location.pathname)) {
-    return <EventsContextProvider>{element}</EventsContextProvider>
+    component = <EventsContextProvider>{component}</EventsContextProvider>
   }
-  return element
+  return <CommonLayout>{component}</CommonLayout>
 }
 
 Amplify.configure({
@@ -38,3 +40,9 @@ Amplify.configure({
     },
   },
 })
+
+export const wrapRootElement: GatsbyBrowser['wrapRootElement'] = ({
+  element,
+}) => {
+  return <AuthContextProvider>{element}</AuthContextProvider>
+}

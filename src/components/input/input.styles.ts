@@ -1,5 +1,8 @@
 import tw from 'twin.macro'
 
+export const inputLabelStyle = {
+  ...tw`text-gray-800 text-sm font-light`,
+}
 export const inputStyle = {
   ...tw`rounded-full px-3 py-1.5 bg-white`,
   input: {
@@ -11,7 +14,4 @@ export const inputStyle = {
       ...tw`text-gray-400`,
     },
   },
-}
-export const inputLabelStyle = {
-  ...tw`text-gray-800 text-sm font-light`,
 }

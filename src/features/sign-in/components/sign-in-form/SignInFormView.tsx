@@ -1,17 +1,16 @@
 import React from 'react'
-import { navigate } from 'gatsby'
 
 import {
   Auth as AuthSubLayout,
   PrimaryForm,
   PrimaryOption,
 } from '../../../../components/auth'
+import { useAuthContext } from '../../../../contexts'
 import type { TFormFields } from './sign-in-form.types'
 
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import * as Joi from 'joi'
-import { Auth, Cache } from 'aws-amplify'
 
 const primaryFormFields = [
   {
@@ -32,34 +31,14 @@ const schema = Joi.object({
 })
 
 export const SignInFormView = () => {
+  const { manageSignIn } = useAuthContext()
+
   const useFormReturn = useForm<TFormFields>({
     resolver: joiResolver(schema),
   })
 
-  /**
-   * TODO: separate that
-   */
-  const handleValid: SubmitHandler<TFormFields> = async ({ email }) => {
-    try {
-      const { username, Session } = await Auth.signIn(email)
-      /**
-       * TODO: change that to savePreAuthSession() function using DynamoDB
-       */
-      Cache.setItem(
-        'user',
-        JSON.stringify({
-          username,
-          session: Session,
-        })
-      )
-
-      navigate('/auth/sign-in-verification')
-    } catch (error) {
-      /**
-       * TODO: alarm
-       */
-      console.log(`Error signing in. Reason: ${error}`)
-    }
+  const handleValid: SubmitHandler<TFormFields> = async userAttributes => {
+    await manageSignIn(userAttributes)
   }
 
   return (

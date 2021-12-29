@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { Option } from '../../../option'
-import type { TType as TOptionType } from '../../../option'
 import { NumberOf } from '../../../number-of'
+import type { TType as TOptionType } from '../../../option'
 import {
   outerBoxStyle,
   innerBoxStyle,

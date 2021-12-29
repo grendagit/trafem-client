@@ -1,34 +1,34 @@
 import React from 'react'
 
-import { IndexLayout } from '../../layouts/index'
-import { SEO } from '../../components/SEO'
-import { MapWithClusters } from '../../components/map'
-import { Listing } from '../../components/listing'
 import { useEventsContext } from '../../contexts'
+import { SEO } from '../../components/SEO'
+import { SearchBar } from '../../components/search-bar'
+import { Listing } from '../../components/listing'
+import { MapWithClusters } from '../../components/map'
+import type { TGetEventsReturn } from '../../types/event.type'
 
-import { Grid, Box } from '@mui/material'
+import { Grid } from '@mui/material'
 
 export const IndexView = () => {
   const { events, areEventsLoading } = useEventsContext()
-  const { latestEvents, groupedEvents } = events
+  const { orderedEvents, groupedEvents } = areEventsLoading
+    ? ({} as TGetEventsReturn)
+    : events!
 
   return (
-    <Box id="root">
-      <IndexLayout>
-        <SEO title="Trafem" description="" />
+    <>
+      <SEO title="Trafem" description="" />
 
-        <Grid container>
-          <Grid item xs={7}>
-            <Listing events={latestEvents} />
-          </Grid>
-          <Grid item xs={5}>
-            <MapWithClusters
-              mapMaterials={groupedEvents}
-              areMapMaterialsLoading={areEventsLoading}
-            />
-          </Grid>
+      <SearchBar />
+
+      <Grid container flex={1}>
+        <Grid item xs={7}>
+          <Listing events={orderedEvents} />
         </Grid>
-      </IndexLayout>
-    </Box>
+        <Grid item xs={5}>
+          <MapWithClusters mapMaterials={groupedEvents} />
+        </Grid>
+      </Grid>
+    </>
   )
 }

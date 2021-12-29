@@ -18,11 +18,16 @@ html {
   box-sizing: inherit;
 }
 
-#root {
+#gatsby-focus-wrapper {
   @apply flex flex-col h-screen;
-}
+
+  & [tabindex='-1'] {
+    @apply flex flex-1
+  }
+} 
+
 main {
-  @apply flex flex-1;
+  @apply flex flex-col flex-1;
 }
 
 body {

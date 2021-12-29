@@ -1,6 +1,6 @@
 import type { TGetEventsReturn } from '../../types/event.type'
 
 export type TContextValue = {
-  events: TGetEventsReturn
+  events?: TGetEventsReturn
   areEventsLoading: boolean
 }

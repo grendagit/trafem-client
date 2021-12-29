@@ -1,4 +1,4 @@
-export function hexToRgb(hex: string): number[] {
+export function hexToRgb(hex: string) {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
   hex = hex.replace(
     shorthandRegex,

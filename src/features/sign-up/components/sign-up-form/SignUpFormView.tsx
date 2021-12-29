@@ -1,18 +1,16 @@
 import React from 'react'
-import { navigate } from 'gatsby'
 
 import {
   Auth as AuthSubLayout,
   PrimaryForm,
   PrimaryOption,
 } from '../../../../components/auth'
+import { useAuthContext } from '../../../../contexts'
 import type { TFormFields } from './sign-up-form.types'
 
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import * as Joi from 'joi'
-import { Auth } from 'aws-amplify'
-import * as generator from 'generate-password-browser'
 
 const primaryFormFields = [
   {
@@ -53,41 +51,14 @@ const schema = Joi.object({
 })
 
 export const SignUpFormView = () => {
+  const { manageSignUp } = useAuthContext()
+
   const useFormReturn = useForm<TFormFields>({
     resolver: joiResolver(schema),
   })
 
-  /**
-   * TODO: separate that
-   */
-  const handleValid: SubmitHandler<TFormFields> = async ({
-    email,
-    givenName,
-    familyName,
-  }) => {
-    try {
-      await Auth.signUp({
-        username: email,
-        password: generator.generate({
-          numbers: true,
-          symbols: true,
-          lowercase: true,
-          uppercase: true,
-          strict: true,
-        }),
-        attributes: {
-          email,
-          given_name: givenName,
-          family_name: familyName,
-        },
-      })
-      navigate('/auth/sign-in')
-    } catch (error) {
-      /**
-       * TODO: alarm
-       */
-      console.log(`Error signing up. Reason: ${error}`)
-    }
+  const handleValid: SubmitHandler<TFormFields> = async userAttributes => {
+    await manageSignUp(userAttributes)
   }
 
   return (

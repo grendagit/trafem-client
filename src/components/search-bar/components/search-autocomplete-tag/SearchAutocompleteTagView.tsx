@@ -2,6 +2,7 @@ import React from 'react'
 
 import { chipStyle } from './search-autocomplete-tag.styles'
 import { prepareStyles } from '../../../../helpers/prepare-styles.helper'
+// Icons
 import Close from '../../../../assets/svg/icons/close.inline.svg'
 
 import { Chip, IconButton, SvgIcon } from '@mui/material'

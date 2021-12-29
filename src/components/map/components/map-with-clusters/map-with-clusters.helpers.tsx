@@ -39,7 +39,7 @@ function getCoords({
   return coordinates as LngLatLike
 }
 
-function createID(ID: number, type: TOptionType, unclustered: boolean): string {
+function createID(ID: number, type: TOptionType, unclustered: boolean) {
   const prefix = unclustered ? 'unclustered' : 'clustered'
   return `${prefix}-${type}-${ID}`
 }
@@ -64,7 +64,7 @@ export function addLayerListenersAssociatedWithPopup(
   type: TOptionType,
   popup: PopupWithAssociatedID,
   map: Map
-): void {
+) {
   map.on('click', layerIDs.unclustered, event => {
     const map = event.target
     const feature = (
@@ -114,10 +114,7 @@ export function addLayerListenersAssociatedWithPopup(
   })
 }
 
-export function addPopupListeners(
-  popup: PopupWithAssociatedID,
-  map: Map
-): void {
+export function addPopupListeners(popup: PopupWithAssociatedID, map: Map) {
   popup.on('open', event => {
     const assertedEvent = event as Generic
     const popup = assertedEvent.target
@@ -141,7 +138,7 @@ export function addPopupListeners(
 function createHTMLMarkerObject(
   { point_count: pointCount }: Generic,
   type: TOptionType
-): HTMLDivElement {
+) {
   const HTMLMarkerObject = <CustomMarker type={type} pointCount={pointCount} />
 
   const el = document.createElement('div')
@@ -150,16 +147,7 @@ function createHTMLMarkerObject(
   return el
 }
 
-/**
- * provides state to update markers
- * @returns update markers function
- */
-export function getUpdateMarkers(): (
-  sourceID: string,
-  type: TOptionType,
-  popup: PopupWithAssociatedID,
-  map: Map
-) => void {
+export function getUpdateMarkers() {
   /**
    * objects for caching and keeping track of HTML marker objects
    */

@@ -1,3 +1,3 @@
-export function getNumberOfFilters(...values: any[]): number {
+export function getNumberOfFilters(...values: any[]) {
   return values.filter(Boolean).length
 }

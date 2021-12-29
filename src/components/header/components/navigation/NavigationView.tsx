@@ -2,19 +2,19 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import type { TRoute } from './navigation.types'
-import type { TTestID } from '../../../../types/test.type'
+import type { TTestId } from '../../../../types/test.type'
 
-import { Stack } from '@mui/material'
+import { Stack, Box } from '@mui/material'
 
 type Props = {
   routes: TRoute[]
-} & TTestID
+} & TTestId
 
 export const NavigationView = ({ routes, ...rest }: Props) => {
   const routeItems = routes.map(({ path, text }) => (
-    <Link to={path} key={path}>
-      {text}
-    </Link>
+    <Box component="li" key={path}>
+      <Link to={path}>{text}</Link>
+    </Box>
   ))
 
   return (
@@ -25,6 +25,7 @@ export const NavigationView = ({ routes, ...rest }: Props) => {
         alignItems="center"
         spacing={2}
         paddingX={2}
+        component="ul"
       >
         {routeItems}
       </Stack>

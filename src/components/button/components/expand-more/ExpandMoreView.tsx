@@ -6,6 +6,7 @@ import { OutlinedPrimaryButton } from '../outlined-primary'
 import { TextPrimaryButton } from '../text-primary'
 import { buttonStyle, endIconStyle } from './expand-more.styles'
 import { prepareStyles } from '../../../../helpers/prepare-styles.helper'
+// Icons
 import ExpandArrow from '../../../../assets/svg/icons/expand-arrow.inline.svg'
 
 import { SvgIcon } from '@mui/material'

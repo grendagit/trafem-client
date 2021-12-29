@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { transformCenter } from './map.helpers'
 import { boxStyle, mapContainerBoxStyle } from './map.styles'
 
+import { Box } from '@mui/material'
 import { Map } from 'mapbox-gl'
 import type {
   MapboxOptions,
@@ -10,7 +11,6 @@ import type {
   EventData,
   LngLatBoundsLike,
 } from 'mapbox-gl'
-import { Box } from '@mui/material'
 
 type Props = {
   mapOptions?: Omit<MapboxOptions, 'container'>

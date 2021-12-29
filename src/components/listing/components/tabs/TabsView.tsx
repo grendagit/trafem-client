@@ -20,9 +20,11 @@ type Props = {
 
 export const TabsView = ({ tabs, sortingTypes }: Props) => {
   const tabItems = tabs.map(({ path, text }) => (
-    <Link to={path} key={path} style={linkStyle} activeStyle={activeLinkStyle}>
-      {text}
-    </Link>
+    <Box component="li" key={path}>
+      <Link to={path} style={linkStyle} activeStyle={activeLinkStyle}>
+        {text}
+      </Link>
+    </Box>
   ))
 
   return (
@@ -33,6 +35,7 @@ export const TabsView = ({ tabs, sortingTypes }: Props) => {
         alignItems="flex-start"
         spacing={3}
         paddingX={3}
+        component="ul"
       >
         {tabItems}
       </Stack>

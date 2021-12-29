@@ -25,10 +25,10 @@ const tabs: TTab[] = [
 const sortingTypes = ['Czas dodania: najnowsze', 'Cena: od najwyższej']
 
 type Props = {
-  events: TEvent[]
+  events?: TEvent[]
 }
 
-export const ListingView = ({ events }: Props) => {
+export const ListingView = ({ events = [] }: Props) => {
   return (
     <>
       <Box sx={boxStyle}>
@@ -43,7 +43,7 @@ export const ListingView = ({ events }: Props) => {
                 <FixedSizeList
                   itemData={events}
                   itemCount={events.length}
-                  itemSize={140}
+                  itemSize={125}
                   overscanCount={5}
                   height={height}
                   width={width}

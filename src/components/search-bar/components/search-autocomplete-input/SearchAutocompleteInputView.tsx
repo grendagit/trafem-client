@@ -8,6 +8,7 @@ import {
   inputBoxStyle,
 } from './search-autocomplete-input.styles'
 import { prepareStyles } from '../../../../helpers/prepare-styles.helper'
+// Icons
 import Search from '../../../../assets/svg/icons/search.inline.svg'
 
 import { IconButton, InputAdornment, SvgIcon, Box } from '@mui/material'

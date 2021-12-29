@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
+import { useAuthContext } from '../../contexts'
 import { Logo } from '../logo'
 import { Navigation } from './components/navigation'
 import { Account } from './components/account'
 import type { TRoute } from './components/navigation'
-import type { TTestID } from '../../types/test.type'
+import type { TTestId } from '../../types/test.type'
 import {
   appBarStyle,
   toolBarStyle,
@@ -13,6 +14,7 @@ import {
   menuIconButtonBoxStyle,
   menuIconButtonStyle,
 } from './header.styles'
+// Icons
 import Menu from '../../assets/svg/icons/menu.inline.svg'
 
 import {
@@ -24,17 +26,14 @@ import {
   Stack,
   Divider,
 } from '@mui/material'
-import { Auth } from 'aws-amplify'
 
 const navigationRoutes: TRoute[] = [
   {
     path: '/add-offer',
-    text: 'Zamieść ofertę',
+    text: 'Zamieść wydarzenie',
   },
 ]
-
 const authenticatedNavigationRoutes: TRoute[] = [...navigationRoutes]
-
 const unautheticatedNavigationRoutes: TRoute[] = [
   ...navigationRoutes,
   {
@@ -43,33 +42,18 @@ const unautheticatedNavigationRoutes: TRoute[] = [
   },
 ]
 
-type Props = TTestID
+type Props = TTestId
 
 export const HeaderView = (props: Props) => {
-  /**
-   * TODO: separate
-   */
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
-  useEffect(() => {
-    async function checkIfAuthenticated() {
-      try {
-        /**
-         * will throw an error if there is no authenticated user
-         */
-        await Auth.currentAuthenticatedUser()
-
-        setIsAuthenticated(true)
-      } catch (error) {
-        /**
-         * TODO: show the user relevant information
-         */
-      }
-    }
-    checkIfAuthenticated()
-  }, [])
+  const { isAuthenticated } = useAuthContext()
 
   return (
-    <AppBar position="sticky" elevation={0} sx={appBarStyle} {...props}>
+    <AppBar
+      position="sticky"
+      elevation={0}
+      sx={{ ...appBarStyle, zIndex: theme => theme.zIndex.drawer + 1 }}
+      {...props}
+    >
       <Toolbar variant="dense" sx={toolBarStyle}>
         <Box>
           <Logo />

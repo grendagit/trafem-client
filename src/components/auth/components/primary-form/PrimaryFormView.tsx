@@ -2,8 +2,8 @@ import React, { Fragment } from 'react'
 import type { PropsWithChildren } from 'react'
 
 import { PrimaryAuthenticationInput } from '../primary-input'
-import { CustomButton } from '../../../../components/button'
 import { PasswordInput } from '../password-input'
+import { CustomButton } from '../../../../components/button'
 import type { TField } from './primary-form.types'
 import {
   paperStyle,
@@ -17,12 +17,12 @@ import {
 
 import { Paper, Box, Stack } from '@mui/material'
 import type {
-  UseFormReturn,
   FieldValues,
-  Path,
-  FieldError,
+  UseFormReturn,
   SubmitHandler,
   SubmitErrorHandler,
+  Path,
+  FieldError,
 } from 'react-hook-form'
 
 type Props<T extends FieldValues> = {

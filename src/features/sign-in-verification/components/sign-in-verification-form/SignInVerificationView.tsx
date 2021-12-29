@@ -1,14 +1,12 @@
 import React from 'react'
-import { navigate } from 'gatsby'
 
 import { Auth as AuthSubLayout, PrimaryForm } from '../../../../components/auth'
-import { createCognitoUser } from './sign-in-verification-form.helpers'
+import { useAuthContext } from '../../../../contexts'
 import type { TFormFields } from './sign-in-verification-form.types'
 
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import * as Joi from 'joi'
-import { Auth, Cache } from 'aws-amplify'
 
 const primaryFormFields = [
   {
@@ -33,56 +31,14 @@ const schema = Joi.object({
 })
 
 export const SignInVerificationView = () => {
+  const { manageSignInVerification } = useAuthContext()
+
   const useFormReturn = useForm<TFormFields>({
     resolver: joiResolver(schema),
   })
 
-  /**
-   * TODO: separate that
-   */
-  const handleValid: SubmitHandler<TFormFields> = async ({ code }) => {
-    /**
-     * TODO: change that to getPreAuthSession() function using DynamoDB
-     */
-    const { username, session } = JSON.parse(Cache.getItem('user'))
-
-    const user = createCognitoUser(username, session)
-
-    try {
-      /**
-       * sends the answer to the User Pool
-       * will throw an error if the 3rd time wrong answer
-       */
-      const { username, Session } = await Auth.sendCustomChallengeAnswer(
-        user,
-        code
-      )
-      /**
-       * TODO: change that to savePreAuthSession() function using DynamoDB
-       */
-      Cache.setItem(
-        'user',
-        JSON.stringify({
-          username,
-          session: Session,
-        })
-      )
-      /**
-       * the answer was sent successfully, but it might have been wrong (1st or 2nd time)
-       * tests if the user is authenticated now
-       */
-
-      /**
-       * will throw an error if the user is not yet authenticated
-       */
-      await Auth.currentSession()
-      navigate('/')
-    } catch (error) {
-      /**
-       * TODO: alarm
-       */
-      console.log('Apparently the user did not enter the right code')
-    }
+  const handleValid: SubmitHandler<TFormFields> = async parameters => {
+    await manageSignInVerification(parameters)
   }
 
   return (

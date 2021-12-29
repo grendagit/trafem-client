@@ -1,7 +1,7 @@
 import React from 'react'
 
-import type { TEvent } from '../../../../types/event.type'
 import { prepareDuration, prepareParticipationPrice } from './event.helpers'
+import type { TEvent } from '../../../../types/event.type'
 import {
   containerBoxStyle,
   cardStyle,

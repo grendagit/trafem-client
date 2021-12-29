@@ -1,3 +1,3 @@
-export interface TTestID {
+export interface TTestId {
   'data-testid'?: string
 }

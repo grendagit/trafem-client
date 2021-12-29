@@ -15,27 +15,23 @@ import type { PopupOptions, GeoJSONSourceRaw } from 'mapbox-gl'
 
 type Props = {
   mapMaterials?: TMapMaterial
-  areMapMaterialsLoading?: boolean
   sourceOptions?: Omit<GeoJSONSourceRaw, 'type' | 'data' | 'cluster'>
   popupOptions?: Omit<PopupOptions, 'anchor' | 'closeButton'>
 }
 
 export const MapWithClustersView = ({
   mapMaterials = {},
-  areMapMaterialsLoading = true,
   sourceOptions,
   popupOptions,
 }: Props) => {
   const information = useMemo(
     () =>
-      areMapMaterialsLoading
-        ? []
-        : Object.entries(mapMaterials).map(([type, events]) => ({
-            sourceID: type,
-            type: type as TEventType,
-            features: events.map(createGeoJSONObject),
-          })),
-    [areMapMaterialsLoading, mapMaterials]
+      Object.entries(mapMaterials).map(([type, events]) => ({
+        sourceID: type,
+        type: type as TEventType,
+        features: events.map(createGeoJSONObject),
+      })),
+    [mapMaterials]
   )
 
   const handleInitialize = useCallback(
@@ -45,6 +41,7 @@ export const MapWithClustersView = ({
       const popup = new Popup({
         anchor: 'bottom',
         closeButton: false,
+        focusAfterOpen: false,
         offset: 25,
         ...popupOptions,
       })
@@ -114,9 +111,5 @@ export const MapWithClustersView = ({
     [information]
   )
 
-  return (
-    <MapView
-      onInitialize={areMapMaterialsLoading ? undefined : handleInitialize}
-    />
-  )
+  return <MapView onInitialize={handleInitialize} />
 }

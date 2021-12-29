@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import { boxStyle, iconStyle, linkStyle, linkTextStyle } from './account.styles'
+// Icons
 import Heart from '../../../../assets/svg/icons/heart.inline.svg'
 import PencilDrawing from '../../../../assets/svg/icons/pencil-drawing.inline.svg'
 import Chat from '../../../../assets/svg/icons/chat.inline.svg'

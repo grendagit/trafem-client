@@ -6,6 +6,3 @@ export const optionStackStyle = {
 export const optionPharsingStyle = {
   ...tw`text-mystic-maroon`,
 }
-// export const dividerStyle = {
-//   ...tw`w-1/2 border-gray-200`,
-// }

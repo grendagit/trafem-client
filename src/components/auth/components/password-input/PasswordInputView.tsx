@@ -1,12 +1,14 @@
-import React, { useState, forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import type { ComponentProps } from 'react'
 
 import { PrimaryAuthenticationInput } from '../primary-input'
 import { inputEndAdornmentStyle } from './password-input.styles'
+
+// Icons
 import Eye from '../../../../assets/svg/icons/eye.inline.svg'
 import InvisibleEye from '../../../../assets/svg/icons/invisible-eye.inline.svg'
 
-import { IconButton, InputAdornment, SvgIcon } from '@mui/material'
+import { InputAdornment, IconButton, SvgIcon } from '@mui/material'
 
 type Props = Omit<ComponentProps<typeof PrimaryAuthenticationInput>, 'type'>
 

@@ -11,6 +11,7 @@ import {
   popoverCustomButtonStyle,
   popoverPaperStyle,
 } from './more-filters-input.styles'
+// Icons
 import Filter from '../../../../assets/svg/icons/filter.inline.svg'
 
 import { SvgIcon, Grid } from '@mui/material'

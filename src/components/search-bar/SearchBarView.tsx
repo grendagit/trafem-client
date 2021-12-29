@@ -3,6 +3,7 @@ import React from 'react'
 import { Item, SearchAutocomplete } from './components/search-autocomplete'
 import { LocationInput } from './components/location-input'
 import { OptionInput } from './components/option-input'
+import { MoreFiltersInput } from './components/more-filters-input'
 import type { TMaterial as TOptionInputMaterial } from './components/option-input'
 import {
   searchAutocompleteBoxStyle,
@@ -12,8 +13,6 @@ import {
 } from './search-bar.styles'
 
 import { Box, Stack } from '@mui/material'
-
-import { MoreFiltersInput } from './components/more-filters-input'
 
 const searchAutocompleteItems: Item[] = [
   {

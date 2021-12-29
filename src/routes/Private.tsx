@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { navigate } from 'gatsby'
 import type { RouteComponentProps } from '@reach/router'
 
+import { useAuthContext } from '../contexts'
+
 import { Box } from '@mui/material'
-import { Auth } from 'aws-amplify'
 
 type Props = RouteComponentProps & {
   component: React.ComponentType<RouteComponentProps>
@@ -14,29 +15,20 @@ export const PrivateRoute = ({
   location,
   ...rest
 }: Props) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const { isAuthenticated, isAuthenticating } = useAuthContext()
 
   useEffect(() => {
-    async function checkIfAuthenticated() {
-      try {
-        /**
-         * will throw an error if there is no authenticated user
-         */
-        await Auth.currentAuthenticatedUser()
-
-        setIsAuthenticated(true)
-      } catch (error) {
-        /**
-         * TODO: pass state to show the user relevant information
-         */
-        const redirectTo = '/auth/sign-in'
-        if (location?.pathname !== redirectTo) {
-          navigate(redirectTo)
-        }
+    if (!isAuthenticating && !isAuthenticated) {
+      const redirectTo = '/auth/sign-in'
+      if (location?.pathname !== redirectTo) {
+        navigate(redirectTo)
       }
     }
-    checkIfAuthenticated()
-  }, [])
+  }, [isAuthenticating, isAuthenticated])
 
-  return isAuthenticated ? <Component {...rest} /> : <Box></Box>
+  return !isAuthenticating && isAuthenticated ? (
+    <Component {...rest} />
+  ) : (
+    <Box></Box>
+  )
 }

@@ -1,8 +1,4 @@
-export function getLinearGradient(
-  from: string,
-  to: string,
-  alpha?: number
-): string {
+export function getLinearGradient(from: string, to: string, alpha?: number) {
   const [fromColor, toColor] = [from, to].map(color =>
     alpha ? `rgb(${color} / ${alpha})` : `rgb(${color})`
   )

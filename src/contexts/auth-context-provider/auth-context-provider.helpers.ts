@@ -1,7 +1,7 @@
 import type {
   CognitoUserWithSession,
   TAuthConfig,
-} from './sign-in-verification-form.types'
+} from './auth-context-provider.types'
 
 import { Auth } from 'aws-amplify'
 import {
@@ -10,12 +10,8 @@ import {
   CookieStorage,
 } from 'amazon-cognito-identity-js'
 
-const authConfig = Auth.configure() as TAuthConfig
-
-export function createCognitoUser(
-  username: string,
-  session: string
-): CognitoUserWithSession {
+export function createCognitoUser(username: string, session: string) {
+  const authConfig = Auth.configure() as TAuthConfig
   const cookieStorage = new CookieStorage(authConfig.cookieStorage)
 
   const cognitoUser = new CognitoUser({

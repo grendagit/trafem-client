@@ -8,6 +8,7 @@ module.exports = {
         'ghost-white': colors['ghost-white'],
       },
       backgroundColor: {
+        crayola: colors.crayola,
         'ghost-white': colors['ghost-white'],
         'venetian-red': colors['venetian-red'],
         'mystic-maroon': colors['mystic-maroon'],

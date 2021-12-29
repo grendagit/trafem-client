@@ -13,9 +13,10 @@ export type TEvent = {
   participation_price_max: number
   duration_from: string | null
   duration_to: string
+  created_at: string
 }
 export type TGroupedEvents = { [key in TEventType]?: TEvent[] }
 export type TGetEventsReturn = {
   groupedEvents: TGroupedEvents
-  latestEvents: TEvent[]
+  orderedEvents: TEvent[]
 }

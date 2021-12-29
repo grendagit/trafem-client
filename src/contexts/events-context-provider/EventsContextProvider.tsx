@@ -5,22 +5,18 @@ import { manageGetEvents } from './events-context-provider.controllers'
 import type { TGetEventsReturn } from '../../types/event.type'
 import type { TContextValue } from './events-context-provider.types'
 
-/**
- * TODO: undefined insted of that object
- */
-export const defaultEvents = { latestEvents: [], groupedEvents: {} }
-
-const EventsContext = React.createContext<TContextValue>({
-  events: defaultEvents,
+const defaultValues = {
   areEventsLoading: true,
-})
+}
+
+const EventsContext = React.createContext<TContextValue>(defaultValues)
 
 type Props = {}
 
 export const EventsContextProvider = ({
   children,
 }: PropsWithChildren<Props>) => {
-  const [events, setEvents] = useState<TGetEventsReturn>(defaultEvents)
+  const [events, setEvents] = useState<TGetEventsReturn>()
   const [areEventsLoading, setAreEventsLoading] = useState<boolean>(true)
 
   useEffect(() => {
@@ -33,7 +29,9 @@ export const EventsContextProvider = ({
   }, [])
 
   return (
-    <EventsContext.Provider value={{ events, areEventsLoading }}>
+    <EventsContext.Provider
+      value={{ ...defaultValues, events, areEventsLoading }}
+    >
       {children}
     </EventsContext.Provider>
   )

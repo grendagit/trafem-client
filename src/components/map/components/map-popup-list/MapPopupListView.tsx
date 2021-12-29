@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { MapPopupListItem } from '../map-popup-list-item'
-import { paperStyle } from './map-popup-list.styles'
 import type { MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties } from '../map-with-clusters'
+import { paperStyle } from './map-popup-list.styles'
 
 import { Paper } from '@mui/material'
 import { FixedSizeList } from 'react-window'

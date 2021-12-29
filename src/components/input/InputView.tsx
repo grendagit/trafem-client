@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react'
 
-import { inputStyle, inputLabelStyle } from './input.styles'
+import { inputLabelStyle, inputStyle } from './input.styles'
 import { prepareStyles } from '../../helpers/prepare-styles.helper'
 
-import { InputBase, InputLabel } from '@mui/material'
-import type { InputBaseProps, InputLabelProps } from '@mui/material'
+import { InputLabel, InputBase } from '@mui/material'
+import type { InputLabelProps, InputBaseProps } from '@mui/material'
 
 type Props = {
   inputLabel?: string

@@ -8,5 +8,8 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({
   if (page.path.match(/^\/auth/)) {
     page.matchPath = '/auth/*'
     createPage(page)
+  } else if (page.path.match(/^\/user/)) {
+    page.matchPath = '/user/*'
+    createPage(page)
   }
 }
