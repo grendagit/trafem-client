@@ -1,4 +1,4 @@
-import type { TType as TOptionType } from '../components/option'
+import type { TOptionType } from '../components/option'
 
 export type TEventType = Exclude<TOptionType, 'all'>
 export type TEvent = {

@@ -11,13 +11,8 @@ export async function getOrderedEvents() {
     })
     return (await orderedEvents) as TEvent[]
   } catch (error) {
-    /**
-     * TODO: improve handling
-     */
-    console.log(`Failed to get events. Reason ${error}`)
+    throw new Error(`Failed to get ordered events. Reason ${error}`)
   }
-
-  return []
 }
 
 export async function getGroupedEvents() {
@@ -29,11 +24,6 @@ export async function getGroupedEvents() {
     })
     return (await groupedEvents) as TGroupedEvents
   } catch (error) {
-    /**
-     * TODO: improve handling
-     */
-    console.log(`Failed to get grouped events. Reason ${error}`)
+    throw new Error(`Failed to get grouped events. Reason ${error}`)
   }
-
-  return {}
 }

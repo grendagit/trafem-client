@@ -1,41 +1,89 @@
 import React from 'react'
 
 import { Container } from '../container'
-import { OutlinedPrimaryInput } from '../../../../components/input'
-import { CustomButton } from '../../../../components/button'
+import { FormPrimaryInput } from '../../../../components/input'
+import { SubmitButton } from '../../../../components/button'
 import { Event } from '../event'
+import { camelToSnakeCase } from '../../../../helpers/camel-to-snake-case.helper'
+import { updateUserInformation } from './details.controllers'
 import type { TEvent } from '../../../../types/event.type'
-import type { Generic } from '../../../../types/generic.type'
-import {
-  outlinedPrimaryInputStyle,
-  submitButtonBoxStyle,
-  submitButtonStyle,
-  fixedSizeListBoxStyle,
-} from './details.styles'
+import type { TFormFields } from './details.types'
+import { submitButtonBoxStyle, fixedSizeListBoxStyle } from './details.styles'
 
 import { Grid, Box, Stack } from '@mui/material'
 import { FixedSizeList } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { joiResolver } from '@hookform/resolvers/joi'
+import * as Joi from 'joi'
+
+const yourInformationFields = [
+  { id: 'givenName', label: 'Imię' },
+  {
+    id: 'familyName',
+    label: 'Nazwisko',
+  },
+  {
+    id: 'custom:aboutMe',
+    label: 'O mnie',
+    props: { multiline: true, rows: 5 },
+  },
+]
+
+const schema = Joi.object({
+  givenName: Joi.string().max(256).trim().required().messages({
+    'string.max': 'Imię maksymalnie może posiadać 256 znaków',
+    'string.trim': 'Imię nie może zawierać białych znaków przed lub po',
+    'string.empty': 'Imię nie może być puste',
+    'any.required': 'Imię jest wymagane',
+  }),
+  familyName: Joi.string().max(256).trim().required().messages({
+    'string.max': 'Nazwisko maksymalnie może posiadać 256 znaków',
+    'string.trim': 'Nazwisko nie może zawierać białych znaków przed lub po',
+    'string.empty': 'Nazwisko nie może być puste',
+    'any.required': 'Nazwisko jest wymagane',
+  }),
+  'custom:aboutMe': Joi.string().max(2048).trim().allow('').messages({
+    'string.max': 'O mnie maksymalnie może posiadać 2048 znaków',
+    'string.trim': 'O mnie nie może zawierać białych znaków przed lub po',
+  }),
+})
 
 type Props = {
-  userAttributes: Generic
+  user: any
   userEvents: TEvent[]
 }
 
-export const DetailsView = ({ userAttributes, userEvents }: Props) => {
-  const yourInformationFields = [
-    { label: 'Imię', defaultValue: userAttributes.given_name },
-    { label: 'Nazwisko', defaultValue: userAttributes.family_name },
-  ]
+export const DetailsView = ({ user, userEvents }: Props) => {
+  const { attributes } = user
+
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm<TFormFields>({
+    resolver: joiResolver(schema),
+  })
+
+  /**
+   * TODO: separate
+   */
+  const handleValid: SubmitHandler<TFormFields> = async userAttributes => {
+    await updateUserInformation(user, userAttributes)
+  }
+
   const yourInformationInputs = yourInformationFields.map(
-    ({ label, defaultValue }) => (
-      <OutlinedPrimaryInput
-        inputLabel={label}
+    ({ id, label, props }) => (
+      <FormPrimaryInput
+        id={id}
         placeholder={label}
-        defaultValue={defaultValue}
+        {...register(id as keyof TFormFields)}
+        errorMessage={errors[id as keyof TFormFields]?.message}
+        inputLabel={label}
+        defaultValue={attributes[camelToSnakeCase(id)]}
         fullWidth
-        sx={outlinedPrimaryInputStyle}
         key={label}
+        {...props}
       />
     )
   )
@@ -52,22 +100,20 @@ export const DetailsView = ({ userAttributes, userEvents }: Props) => {
     >
       <Grid container item xs={6}>
         <Container title="Twoje informacje">
-          <form>
+          <Box component="form" onSubmit={handleSubmit(handleValid)}>
             <Stack
               direction="column"
-              justifyContent="start"
-              alignItems="start"
+              justifyContent="flex-start"
+              alignItems="flex-start"
               spacing={1}
             >
               {yourInformationInputs}
             </Stack>
 
             <Box sx={submitButtonBoxStyle}>
-              <CustomButton type="submit" sx={submitButtonStyle}>
-                Aktualizuj informacje
-              </CustomButton>
+              <SubmitButton>Aktualizuj informacje</SubmitButton>
             </Box>
-          </form>
+          </Box>
         </Container>
       </Grid>
       <Grid container item xs={6}>

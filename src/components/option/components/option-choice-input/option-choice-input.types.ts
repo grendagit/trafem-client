@@ -1,10 +1,10 @@
-import type { TType as TOptionType } from '../../../option'
+import type { TType } from '../../option.types'
 
 export type TMaterial = {
-  type: TOptionType
+  type: TType
   label: string
 }
-export type TOnClick = (
+export type TOnOptionClick = (
   type: TMaterial['type'],
   event: React.MouseEvent<HTMLDivElement, MouseEvent>
 ) => void

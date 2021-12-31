@@ -1,23 +1,19 @@
 import React, { useState } from 'react'
 import type { ComponentProps } from 'react'
 
-import { MoreFiltersSliderView } from './MoreFiltersSliderView'
+import { EnhancedView } from './EnhancedView'
 
-type ViewProps = ComponentProps<typeof MoreFiltersSliderView>
+type ViewProps = ComponentProps<typeof EnhancedView>
 type Props = Omit<ViewProps, 'value' | 'onChange'>
 
-export const MoreFiltersSliderContainer = ({
-  min = 0,
-  max = 100,
-  ...rest
-}: Props) => {
+export const EnhancedContainer = ({ min = 0, max = 100, ...rest }: Props) => {
   const [value, setValue] = useState<number[]>([min, max])
 
   const handleChange: NonNullable<ViewProps['onChange']> = (_, newValue) =>
     setValue(newValue as number[])
 
   return (
-    <MoreFiltersSliderView
+    <EnhancedView
       value={value}
       onChange={handleChange}
       min={min}

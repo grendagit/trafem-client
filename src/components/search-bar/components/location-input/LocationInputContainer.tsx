@@ -9,8 +9,16 @@ type Props = Omit<ViewProps, 'value' | 'onClick'>
 export const LocationInputContainer = (props: Props) => {
   const [value, setValue] = useState<string | null>(null)
 
-  const handleClick: NonNullable<ViewProps['onClick']> = (location, _) =>
-    setValue(location)
+  const handleClick: NonNullable<ViewProps['onLocationGridItemClick']> = (
+    location,
+    _
+  ) => setValue(location)
 
-  return <LocationInputView value={value} onClick={handleClick} {...props} />
+  return (
+    <LocationInputView
+      value={value}
+      onLocationGridItemClick={handleClick}
+      {...props}
+    />
+  )
 }

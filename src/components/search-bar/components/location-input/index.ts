@@ -1,2 +1,5 @@
 export { LocationInputContainer as LocationInput } from './LocationInputContainer'
-export type { TOnClick } from './location-input.types'
+export type {
+  TOnLocationGridItemClick,
+  TRegion as TLocalInputRegion,
+} from './location-input.types'

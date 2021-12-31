@@ -5,12 +5,12 @@ import { SearchAutocompleteTag } from '../search-autocomplete-tag'
 import { SearchAutocompletePaper } from '../search-autocomplete-paper'
 import { SearchAutocompleteOption } from '../search-autocomplete-option'
 import { SearchAutocompleteInput } from '../search-autocomplete-input'
-import { Item } from './search-autocomplete.types'
+import { TDropdownItem } from './search-autocomplete.types'
 
 import { Autocomplete } from '@mui/material'
 
 type Props<T> = {
-  items: T[]
+  dropdownItems: T[]
   getItemLabel: (item: T) => string
   onChange?: (
     event: React.SyntheticEvent<Element, Event>,
@@ -18,14 +18,14 @@ type Props<T> = {
   ) => void
 }
 
-export const SearchAutocompleteView = <T extends Item>({
-  items,
+export const SearchAutocompleteView = <T extends TDropdownItem>({
+  dropdownItems,
   getItemLabel,
   onChange,
 }: Props<T>) => {
   return (
     <Autocomplete
-      options={items}
+      options={dropdownItems}
       getOptionLabel={getItemLabel}
       autoHighlight
       multiple

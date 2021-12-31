@@ -2,7 +2,10 @@ import React, { useState } from 'react'
 
 import { ExpandMoreButton } from '../../../button'
 import { CustomPopover } from '../../../popover'
-import type { TSortingTypes, TOnClick } from './sorting-input.types'
+import type {
+  TSortingTypes,
+  TOnSortingTypeItemClick,
+} from './sorting-input.types'
 import {
   customPopoverStyle,
   customPopoverPaperStyle,
@@ -14,10 +17,14 @@ import * as R from 'ramda'
 type Props = {
   sortingTypes: TSortingTypes
   value?: string | null
-  onClick?: TOnClick
+  onSortingTypeItemClick?: TOnSortingTypeItemClick
 }
 
-export const SortingInputView = ({ sortingTypes, value, onClick }: Props) => {
+export const SortingInputView = ({
+  sortingTypes,
+  value,
+  onSortingTypeItemClick,
+}: Props) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const handleExpandMoreButtonClick = (
@@ -26,14 +33,17 @@ export const SortingInputView = ({ sortingTypes, value, onClick }: Props) => {
   const handlePopoverClose = () => setAnchorEl(null)
   const popoverOpen = !!anchorEl
 
-  const handleSortingTypeItemClick: TOnClick = (sortingType, event) => {
+  const handleSortingTypeItemClick: TOnSortingTypeItemClick = (
+    sortingType,
+    event
+  ) => {
     handlePopoverClose()
-    onClick?.(sortingType, event)
+    onSortingTypeItemClick?.(sortingType, event)
   }
 
   const sortingTypeItems = sortingTypes.map(sortingType => {
     const handleClick =
-      onClick && R.curry(handleSortingTypeItemClick)(sortingType)
+      onSortingTypeItemClick && R.curry(handleSortingTypeItemClick)(sortingType)
 
     return (
       <ListItemButton onClick={handleClick} key={sortingType}>

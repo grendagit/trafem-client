@@ -10,8 +10,16 @@ export const SortingInputContainer = (props: Props) => {
   const { sortingTypes } = props
   const [value, setValue] = useState<string>(sortingTypes[0])
 
-  const handleClick: NonNullable<ViewProps['onClick']> = (sortingType, _) =>
-    setValue(sortingType)
+  const handleClick: NonNullable<ViewProps['onSortingTypeItemClick']> = (
+    sortingType,
+    _
+  ) => setValue(sortingType)
 
-  return <SortingInputView value={value} onClick={handleClick} {...props} />
+  return (
+    <SortingInputView
+      value={value}
+      onSortingTypeItemClick={handleClick}
+      {...props}
+    />
+  )
 }

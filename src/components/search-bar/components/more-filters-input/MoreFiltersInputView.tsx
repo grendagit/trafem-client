@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react'
 
 import { CustomButton, OutlinedPrimaryButton } from '../../../button'
 import { CustomPopover } from '../../../popover'
-import { MoreFiltersSlider } from '../more-filters-slider'
+import { EnhancedSlider } from '../../../slider'
 import { NumberOf } from '../../../number-of'
 import {
   outlinedPrimaryButtonStyle,
@@ -18,7 +18,7 @@ import { SvgIcon, Grid } from '@mui/material'
 
 type Props = {
   numberOfFilters?: number
-  sliderProps?: ComponentProps<typeof MoreFiltersSlider>
+  sliderProps?: ComponentProps<typeof EnhancedSlider>
 }
 
 export const MoreFiltersInputView = ({
@@ -56,11 +56,11 @@ export const MoreFiltersInputView = ({
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <CustomButton disableRipple sx={popoverCustomButtonStyle}>
-              Koszt wydarzenia
+              Cena uczestnictwa
             </CustomButton>
           </Grid>
           <Grid item xs={12}>
-            <MoreFiltersSlider {...sliderProps} />
+            <EnhancedSlider {...sliderProps} />
           </Grid>
         </Grid>
       </CustomPopover>

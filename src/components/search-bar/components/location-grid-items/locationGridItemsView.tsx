@@ -1,19 +1,23 @@
 import React from 'react'
 
 import { OutlinedPrimaryButton } from '../../../button'
-import type { TOnClick } from '../location-input'
+import type { TOnLocationGridItemClick } from '../location-input'
 
 import { Grid } from '@mui/material'
 import * as R from 'ramda'
 
 type Props = {
   names: string[]
-  onClick?: TOnClick
+  onLocationGridItemClick?: TOnLocationGridItemClick
 }
 
-export const LocationGridItemsView = ({ names, onClick }: Props) => {
+export const LocationGridItemsView = ({
+  names,
+  onLocationGridItemClick,
+}: Props) => {
   const gridItems = names.map(name => {
-    const handleClick = onClick && R.curry(onClick)(name)
+    const handleClick =
+      onLocationGridItemClick && R.curry(onLocationGridItemClick)(name)
 
     return (
       <Grid item key={name}>

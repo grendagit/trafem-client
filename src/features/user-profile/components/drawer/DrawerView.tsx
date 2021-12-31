@@ -46,8 +46,8 @@ export const DrawerView = ({ routes }: Props) => {
     >
       <Stack
         direction="column"
-        justifyContent="start"
-        alignItems="start"
+        justifyContent="flex-start"
+        alignItems="flex-start"
         spacing={1}
         paddingY={3}
         component="ul"

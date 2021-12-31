@@ -1,6 +1,6 @@
-import type { TType as TOptionType } from '../../../option'
+import type { TOptionType } from '../../../option'
 
-export type Item = {
+export type TDropdownItem = {
   label: string
   ID: string
   type: TOptionType

@@ -37,6 +37,9 @@ export const SignInFormView = () => {
     resolver: joiResolver(schema),
   })
 
+  /**
+   * TODO: separate
+   */
   const handleValid: SubmitHandler<TFormFields> = async userAttributes => {
     await manageSignIn(userAttributes)
   }

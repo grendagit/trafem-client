@@ -4,7 +4,7 @@ import { useAuthContext } from '../../contexts'
 import { Logo } from '../logo'
 import { Navigation } from './components/navigation'
 import { Account } from './components/account'
-import type { TRoute } from './components/navigation'
+import type { TNavigationRoute } from './components/navigation'
 import type { TTestId } from '../../types/test.type'
 import {
   appBarStyle,
@@ -27,20 +27,22 @@ import {
   Divider,
 } from '@mui/material'
 
-const navigationRoutes: TRoute[] = [
+const navigationRoutes = [
   {
-    path: '/add-offer',
+    path: '/forms/add-event',
     text: 'Zamieść wydarzenie',
   },
-]
-const authenticatedNavigationRoutes: TRoute[] = [...navigationRoutes]
-const unautheticatedNavigationRoutes: TRoute[] = [
+] as TNavigationRoute[]
+const authenticatedNavigationRoutes = [
+  ...navigationRoutes,
+] as TNavigationRoute[]
+const unautheticatedNavigationRoutes = [
   ...navigationRoutes,
   {
     path: '/auth/sign-in',
     text: 'Zaloguj się',
   },
-]
+] as TNavigationRoute[]
 
 type Props = TTestId
 

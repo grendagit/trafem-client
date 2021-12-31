@@ -1,7 +1,7 @@
 import React, { forwardRef, useState } from 'react'
 import type { ComponentProps } from 'react'
 
-import { PrimaryAuthenticationInput } from '../primary-input'
+import { FormPrimaryInput } from '../../../input'
 import { inputEndAdornmentStyle } from './password-input.styles'
 
 // Icons
@@ -10,7 +10,7 @@ import InvisibleEye from '../../../../assets/svg/icons/invisible-eye.inline.svg'
 
 import { InputAdornment, IconButton, SvgIcon } from '@mui/material'
 
-type Props = Omit<ComponentProps<typeof PrimaryAuthenticationInput>, 'type'>
+type Props = Omit<ComponentProps<typeof FormPrimaryInput>, 'type'>
 
 export const PasswordInputView = forwardRef((props: Props, ref) => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -22,7 +22,7 @@ export const PasswordInputView = forwardRef((props: Props, ref) => {
   ) => event.preventDefault()
 
   return (
-    <PrimaryAuthenticationInput
+    <FormPrimaryInput
       ref={ref}
       type={showPassword ? 'text' : 'password'}
       endAdornment={

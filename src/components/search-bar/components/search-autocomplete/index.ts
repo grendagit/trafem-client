@@ -1,2 +1,2 @@
 export { SearchAutocompleteContainer as SearchAutocomplete } from './SearchAutocompleteContainer'
-export type { Item } from './search-autocomplete.types'
+export type { TDropdownItem as TSearchAutocompleteDropdownItem } from './search-autocomplete.types'

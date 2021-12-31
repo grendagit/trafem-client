@@ -7,31 +7,31 @@ import {
   createGeoJSONObject,
   getUpdateMarkers,
 } from './map-with-clusters.helpers'
-import type { TMapMaterial } from './map-with-clusters.types'
+import type { TMaterial } from './map-with-clusters.types'
 import type { TEventType } from '../../../../types/event.type'
 
 import { Popup } from 'mapbox-gl'
 import type { PopupOptions, GeoJSONSourceRaw } from 'mapbox-gl'
 
 type Props = {
-  mapMaterials?: TMapMaterial
+  materials?: TMaterial
   sourceOptions?: Omit<GeoJSONSourceRaw, 'type' | 'data' | 'cluster'>
   popupOptions?: Omit<PopupOptions, 'anchor' | 'closeButton'>
 }
 
 export const MapWithClustersView = ({
-  mapMaterials = {},
+  materials = {},
   sourceOptions,
   popupOptions,
 }: Props) => {
   const information = useMemo(
     () =>
-      Object.entries(mapMaterials).map(([type, events]) => ({
+      Object.entries(materials).map(([type, events]) => ({
         sourceID: type,
         type: type as TEventType,
         features: events.map(createGeoJSONObject),
       })),
-    [mapMaterials]
+    [materials]
   )
 
   const handleInitialize = useCallback(

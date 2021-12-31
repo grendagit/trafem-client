@@ -1,5 +1,5 @@
 export type TSortingTypes = string[]
-export type TOnClick = (
+export type TOnSortingTypeItemClick = (
   sortingType: string,
   event: React.MouseEvent<HTMLButtonElement, MouseEvent>
 ) => void

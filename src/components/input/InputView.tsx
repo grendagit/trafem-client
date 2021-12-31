@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react'
 
-import { inputLabelStyle, inputStyle } from './input.styles'
+import { boxStyle, inputLabelStyle, inputStyle } from './input.styles'
 import { prepareStyles } from '../../helpers/prepare-styles.helper'
 
-import { InputLabel, InputBase } from '@mui/material'
-import type { InputLabelProps, InputBaseProps } from '@mui/material'
+import { Box, InputLabel, InputBase } from '@mui/material'
+import type { BoxProps, InputLabelProps, InputBaseProps } from '@mui/material'
 
 type Props = {
+  boxProps?: BoxProps
   inputLabel?: string
   inputLabelProps?: InputLabelProps
 } & InputBaseProps
@@ -14,6 +15,7 @@ type Props = {
 export const InputView = forwardRef(
   (
     {
+      boxProps: { sx: boxSx, ...boxRest } = {},
       inputLabel,
       inputLabelProps: { sx: inputLabelSx, ...restInputLabel } = {},
       sx,
@@ -21,11 +23,12 @@ export const InputView = forwardRef(
     }: Props,
     ref
   ) => {
+    const { id } = rest
     return (
-      <>
+      <Box sx={prepareStyles(boxStyle, boxSx)} {...boxRest}>
         {inputLabel && (
           <InputLabel
-            htmlFor={rest.id}
+            htmlFor={id}
             sx={prepareStyles(inputLabelStyle, inputLabelSx)}
             {...restInputLabel}
           >
@@ -33,7 +36,7 @@ export const InputView = forwardRef(
           </InputLabel>
         )}
         <InputBase ref={ref} sx={prepareStyles(inputStyle, sx)} {...rest} />
-      </>
+      </Box>
     )
   }
 )

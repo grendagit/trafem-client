@@ -27,7 +27,7 @@ export const DetailsContainer = () => {
 
   return (
     <DetailsView
-      userAttributes={user.attributes}
+      user={user}
       userEvents={areUserEventsLoading ? [] : userEvents!}
     />
   )

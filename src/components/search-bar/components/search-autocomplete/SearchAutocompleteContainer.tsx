@@ -7,7 +7,7 @@ type ViewProps = ComponentProps<typeof SearchAutocompleteView>
 type Props = Omit<ViewProps, 'onChange'>
 
 export const SearchAutocompleteContainer = (props: Props) => {
-  const [_, setValue] = useState<ViewProps['items'] | null>(null)
+  const [_, setValue] = useState<ViewProps['dropdownItems'] | null>(null)
 
   const handleChange: NonNullable<ViewProps['onChange']> = (_, newValue) =>
     setValue(newValue)

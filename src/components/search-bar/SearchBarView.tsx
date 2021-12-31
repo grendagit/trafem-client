@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { Item, SearchAutocomplete } from './components/search-autocomplete'
+import { SearchAutocomplete } from './components/search-autocomplete'
 import { LocationInput } from './components/location-input'
-import { OptionInput } from './components/option-input'
+import { OptionChoiceInput } from '../option'
 import { MoreFiltersInput } from './components/more-filters-input'
-import type { TMaterial as TOptionInputMaterial } from './components/option-input'
+import type { TSearchAutocompleteDropdownItem } from './components/search-autocomplete'
+import type { TLocalInputRegion } from './components/location-input'
+import type { TOptionChoiceInputMaterial } from '../option'
 import {
   searchAutocompleteBoxStyle,
   locationInputBoxStyle,
@@ -14,7 +16,7 @@ import {
 
 import { Box, Stack } from '@mui/material'
 
-const searchAutocompleteItems: Item[] = [
+const searchAutocompleteDropdownItems = [
   {
     label: 'Impreza',
     ID: 'TYP',
@@ -25,7 +27,7 @@ const searchAutocompleteItems: Item[] = [
     ID: 'TYP',
     type: 'party',
   },
-]
+] as TSearchAutocompleteDropdownItem[]
 const localInputRegions = [
   {
     name: 'dolnośląskie',
@@ -91,8 +93,8 @@ const localInputRegions = [
     name: 'zachodniopomorskie',
     cities: ['Szczecin'],
   },
-]
-const optionInputMaterials: TOptionInputMaterial[] = [
+] as TLocalInputRegion[]
+const optionChoiceInputMaterials = [
   {
     type: 'all',
     label: 'Wszystko',
@@ -105,10 +107,12 @@ const optionInputMaterials: TOptionInputMaterial[] = [
     type: 'party',
     label: 'Impreza',
   },
-]
+] as TOptionChoiceInputMaterial[]
 
 export const SearchBarView = () => {
-  const getSearchAutomcompleteItemLabel = ({ label }: Item) => label
+  const getSearchAutomcompleteDropdownItemLabel = ({
+    label,
+  }: TSearchAutocompleteDropdownItem) => label
 
   return (
     <Stack
@@ -120,15 +124,15 @@ export const SearchBarView = () => {
     >
       <Box sx={searchAutocompleteBoxStyle}>
         <SearchAutocomplete
-          items={searchAutocompleteItems}
-          getItemLabel={getSearchAutomcompleteItemLabel}
+          dropdownItems={searchAutocompleteDropdownItems}
+          getItemLabel={getSearchAutomcompleteDropdownItemLabel}
         />
       </Box>
       <Box sx={locationInputBoxStyle}>
         <LocationInput regions={localInputRegions} />
       </Box>
       <Box sx={optionInputBoxStyle}>
-        <OptionInput materials={optionInputMaterials} />
+        <OptionChoiceInput materials={optionChoiceInputMaterials} />
       </Box>
       <Box sx={moreFiltersInputBoxStyle}>
         <MoreFiltersInput sliderProps={{ max: 100000, step: 1000 }} />

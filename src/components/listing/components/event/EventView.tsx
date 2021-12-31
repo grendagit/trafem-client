@@ -34,7 +34,7 @@ export const EventView = ({
 
   return (
     <Box style={style} sx={containerBoxStyle} key={index}>
-      <Card component="a" href="/" elevation={1} sx={cardStyle}>
+      <Card component="a" href="/" elevation={2} sx={cardStyle}>
         <CardContent sx={cardContentStyle}>
           <Box sx={{ ...cardContextBoxStyle, ...headerBoxStyle }}>
             <Box component="h2" sx={titleStyle}>

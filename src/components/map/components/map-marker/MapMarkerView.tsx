@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Option } from '../../../option'
 import { NumberOf } from '../../../number-of'
-import type { TType as TOptionType } from '../../../option'
+import type { TOptionType } from '../../../option'
 import {
   outerBoxStyle,
   innerBoxStyle,

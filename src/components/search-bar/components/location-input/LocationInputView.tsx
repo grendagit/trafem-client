@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { ExpandMoreButton, CustomButton } from '../../../button'
 import { CustomPopover } from '../../../popover'
 import { LocationGridItems } from '../location-grid-items'
-import type { TOnClick, TRegion } from './location-input.types'
+import type { TOnLocationGridItemClick, TRegion } from './location-input.types'
 import {
   popoverCustomButtonStyle,
   popoverExpandMoreButtonStyle,
@@ -15,10 +15,14 @@ import { Grid, Collapse } from '@mui/material'
 type Props = {
   regions: TRegion[]
   value?: string | null
-  onClick?: TOnClick
+  onLocationGridItemClick?: TOnLocationGridItemClick
 }
 
-export const LocationInputView = ({ regions, value, onClick }: Props) => {
+export const LocationInputView = ({
+  regions,
+  value,
+  onLocationGridItemClick,
+}: Props) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [voivodeshipsExpanded, setVoivodeshipsExpanded] = useState(false)
 
@@ -31,9 +35,12 @@ export const LocationInputView = ({ regions, value, onClick }: Props) => {
   const handleExpandMoreButtonClickVoivodeshipsExpanded = () =>
     setVoivodeshipsExpanded(!voivodeshipsExpanded)
 
-  const handleGridItemClick: TOnClick = (location, event) => {
+  const handleLocationGridItemClick: TOnLocationGridItemClick = (
+    location,
+    event
+  ) => {
     handlePopoverClose()
-    onClick?.(location, event)
+    onLocationGridItemClick?.(location, event)
   }
 
   const cities = regions.flatMap(({ cities }) => cities)
@@ -62,7 +69,10 @@ export const LocationInputView = ({ regions, value, onClick }: Props) => {
             </CustomButton>
           </Grid>
           <Grid item xs={12}>
-            <LocationGridItems names={cities} onClick={handleGridItemClick} />
+            <LocationGridItems
+              names={cities}
+              onLocationGridItemClick={handleLocationGridItemClick}
+            />
           </Grid>
           <Grid item xs={12}>
             <ExpandMoreButton
@@ -80,7 +90,7 @@ export const LocationInputView = ({ regions, value, onClick }: Props) => {
             <Collapse timeout={0} in={voivodeshipsExpanded}>
               <LocationGridItems
                 names={voivodeships}
-                onClick={handleGridItemClick}
+                onLocationGridItemClick={handleLocationGridItemClick}
               />
             </Collapse>
           </Grid>

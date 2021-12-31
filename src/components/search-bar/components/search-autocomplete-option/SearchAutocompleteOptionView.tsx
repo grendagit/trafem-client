@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Indentifier } from '../indentifier'
 import { Option } from '../../../option'
-import type { TType as TOptionType } from '../../../option'
+import type { TOptionType } from '../../../option'
 
 import { Box, Stack } from '@mui/material'
 import type { BoxProps } from '@mui/material'

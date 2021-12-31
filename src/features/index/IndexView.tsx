@@ -10,10 +10,8 @@ import type { TGetEventsReturn } from '../../types/event.type'
 import { Grid } from '@mui/material'
 
 export const IndexView = () => {
-  const { events, areEventsLoading } = useEventsContext()
-  const { orderedEvents, groupedEvents } = areEventsLoading
-    ? ({} as TGetEventsReturn)
-    : events!
+  const { events } = useEventsContext()
+  const { orderedEvents, groupedEvents } = events || ({} as TGetEventsReturn)
 
   return (
     <>
@@ -26,7 +24,7 @@ export const IndexView = () => {
           <Listing events={orderedEvents} />
         </Grid>
         <Grid item xs={5}>
-          <MapWithClusters mapMaterials={groupedEvents} />
+          <MapWithClusters materials={groupedEvents} />
         </Grid>
       </Grid>
     </>

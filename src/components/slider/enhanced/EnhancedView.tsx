@@ -1,25 +1,25 @@
 import React from 'react'
 import type { ComponentProps } from 'react'
 
-import { PrimarySlider } from '../../../slider'
+import { PrimaryView } from '../primary/PrimaryView'
 import { Box } from '@mui/material'
-import { generateCost } from './more-filters-slider.helpers'
+import { generateCost } from './enhanced.helpers'
 import {
   fromToBoxStyle,
   displayBoxStyle,
   separatorBoxStyle,
-} from './more-filters-slider.styles'
+} from './enhanced.styles'
 
-type PrimarySliderProps = ComponentProps<typeof PrimarySlider>
+type PrimarySliderProps = ComponentProps<typeof PrimaryView>
 type Props = PrimarySliderProps & {
   value: number[]
   onChange: NonNullable<PrimarySliderProps['onChange']>
 }
 
-export const MoreFiltersSliderView = ({ value, ...rest }: Props) => {
+export const EnhancedView = ({ value, ...rest }: Props) => {
   return (
     <>
-      <PrimarySlider value={value} {...rest} />
+      <PrimaryView value={value} {...rest} />
       <Box sx={fromToBoxStyle}>
         <Box sx={displayBoxStyle}>{generateCost('minimalnie', value[0])}</Box>
         <Box sx={separatorBoxStyle}>—</Box>

@@ -11,7 +11,6 @@ import type {
   TSignInUserAttributes,
   TSignUpUserAttributes,
   TSignInVerificationParameters,
-  // TStateFunctions,
 } from './auth-context-provider.types'
 
 export async function manageSignUp(userAttributes: TSignUpUserAttributes) {

@@ -18,7 +18,7 @@ export const EventsContextProvider = ({
 }: PropsWithChildren<Props>) => {
   const [events, setEvents] = useState<TGetEventsReturn>()
   const [areEventsLoading, setAreEventsLoading] = useState<boolean>(true)
-
+  console.log(events)
   useEffect(() => {
     async function callController() {
       const events = await manageGetEvents()

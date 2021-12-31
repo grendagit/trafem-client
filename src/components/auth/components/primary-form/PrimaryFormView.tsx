@@ -1,18 +1,16 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import type { PropsWithChildren } from 'react'
 
-import { PrimaryAuthenticationInput } from '../primary-input'
+import { FormPrimaryInput } from '../../../input'
 import { PasswordInput } from '../password-input'
-import { CustomButton } from '../../../../components/button'
+import { SubmitButton } from '../../../button/components/submit'
 import type { TField } from './primary-form.types'
 import {
   paperStyle,
   headerBoxStyle,
   titleStyle,
   subtitleStyle,
-  inputErrorStyle,
   submitButtonBoxStyle,
-  submitButtonStyle,
 } from './primary-form.styles'
 
 import { Paper, Box, Stack } from '@mui/material'
@@ -21,8 +19,6 @@ import type {
   UseFormReturn,
   SubmitHandler,
   SubmitErrorHandler,
-  Path,
-  FieldError,
 } from 'react-hook-form'
 
 type Props<T extends FieldValues> = {
@@ -53,20 +49,17 @@ export const PrimaryFormView = <T extends FieldValues>({
 
   const inputs = fields.map(({ id, label }) => {
     const ConditionalInput =
-      id === 'password' ? PasswordInput : PrimaryAuthenticationInput
+      id === 'password' ? PasswordInput : FormPrimaryInput
     return (
-      <Fragment key={id}>
-        <ConditionalInput
-          id={id}
-          placeholder={label}
-          {...register(id as Path<T>)}
-          inputLabel={label}
-          fullWidth
-        />
-        <Box component="p" sx={inputErrorStyle}>
-          {(errors as Partial<Record<string, FieldError>>)[id]?.message}
-        </Box>
-      </Fragment>
+      <ConditionalInput
+        id={id}
+        placeholder={label}
+        {...register(id as any)}
+        errorMessage={(errors as any)[id]?.message}
+        inputLabel={label}
+        fullWidth
+        key={id}
+      />
     )
   })
 
@@ -80,22 +73,20 @@ export const PrimaryFormView = <T extends FieldValues>({
           {subtitle}
         </Box>
       </Box>
-      <form onSubmit={handleSubmit(onValid, onInvalid)}>
+      <Box component="form" onSubmit={handleSubmit(onValid, onInvalid)}>
         <Stack
           direction="column"
-          justifyContent="start"
-          alignItems="start"
+          justifyContent="flex-start"
+          alignItems="flex-start"
           spacing={1}
         >
           {inputs}
         </Stack>
         <Box sx={submitButtonBoxStyle}>
-          <CustomButton type="submit" sx={submitButtonStyle}>
-            {submit}
-          </CustomButton>
+          <SubmitButton>{submit}</SubmitButton>
         </Box>
         {children}
-      </form>
+      </Box>
     </Paper>
   )
 }

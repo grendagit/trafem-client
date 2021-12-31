@@ -42,7 +42,7 @@ type Props = {
   type: TType
   inactive?: boolean
   outerBoxProps?: BoxProps
-  innerBoxProps?: BoxProps
+  innerBoxProps?: BoxProps<'button'>
   fontSize?: SvgIconProps['fontSize']
 }
 
@@ -63,6 +63,7 @@ export const OptionView = ({
     >
       <Box
         component="button"
+        type="button"
         sx={prepareStyles(innerBoxStyle(from, to), innerBoxSx)}
         {...restInnerBox}
       >

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 
 import { MapMarker as CustomMarker } from '../map-marker'
 import { MapPopupList as CustomPopupList } from '../map-popup-list'
-import type { TType as TOptionType } from '../../../option'
+import type { TOptionType } from '../../../option'
 import type {
-  TMapMarker,
+  TMarker,
   FeatureNonNullableGeoJsonProperties,
   MapboxGeoJSONFeaturePointNonNullableGeoJsonProperties,
   PopupWithAssociatedID,
@@ -19,7 +19,7 @@ export function createGeoJSONObject({
   longitude,
   latitude,
   ...rest
-}: TMapMarker): FeatureNonNullableGeoJsonProperties {
+}: TMarker): FeatureNonNullableGeoJsonProperties {
   return {
     type: 'Feature',
     properties: {

@@ -3,8 +3,8 @@ import type { MapboxGeoJSONFeature } from 'mapbox-gl'
 import type { Feature, Point, GeoJsonProperties, Geometry } from 'geojson'
 import type { TEvent, TGroupedEvents } from '../../../../types/event.type'
 
-export type TMapMarker = TEvent
-export type TMapMaterial = TGroupedEvents
+export type TMarker = TEvent
+export type TMaterial = TGroupedEvents
 
 export type FeatureNonNullableGeoJsonProperties<
   T extends Geometry | null = Point

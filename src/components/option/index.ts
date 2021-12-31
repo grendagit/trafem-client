@@ -1,2 +1,5 @@
 export { OptionView as Option } from './OptionView'
-export type { TType } from './option.types'
+export { EnhancedOption } from './components/enhanced'
+export { OptionChoiceInput } from './components/option-choice-input'
+export type { TType as TOptionType } from './option.types'
+export type { TOptionChoiceInputMaterial } from './components/option-choice-input'

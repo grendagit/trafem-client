@@ -4,7 +4,7 @@ import { Router } from '@reach/router'
 import { PrivateRoute } from '../routes'
 import { UserProfilePage } from '../features/user-profile'
 
-const EndUser = () => {
+const User = () => {
   return (
     <Router basepath="/user">
       <PrivateRoute component={UserProfilePage} path="/profile" />
@@ -12,4 +12,4 @@ const EndUser = () => {
   )
 }
 
-export default EndUser
+export default User
