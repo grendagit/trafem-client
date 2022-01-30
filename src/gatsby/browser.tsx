@@ -20,7 +20,7 @@ export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
   props: { location },
 }) => {
   let component = element
-  if (['/'].includes(location.pathname)) {
+  if (['/', '/event-details'].includes(location.pathname)) {
     component = <EventsContextProvider>{component}</EventsContextProvider>
   }
   return <CommonLayout>{component}</CommonLayout>
@@ -28,10 +28,9 @@ export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
 
 Amplify.configure({
   Auth: {
-    region: process.env.GATSBY_AMAZON_COGNITO_REGION,
-    userPoolId: process.env.GATSBY_AMAZON_COGNITO_USER_POOL_ID,
-    userPoolWebClientId:
-      process.env.GATSBY_AMAZON_COGNITO_USER_POOL_WEB_CLIENT_ID,
+    region: process.env.GATSBY_AWS_COGNITO_UP_REGION,
+    userPoolId: process.env.GATSBY_AWS_COGNITO_UP_ID,
+    userPoolWebClientId: process.env.GATSBY_AWS_COGNITO_UP_APP_CLIENT_ID,
     authenticationFlowType: 'CUSTOM_AUTH',
     cookieStorage: {
       domain: 'localhost',

@@ -10,7 +10,7 @@ export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({
   props: { location },
 }) => {
   let component = element
-  if (['/'].includes(location.pathname)) {
+  if (['/', '/event-details'].includes(location.pathname)) {
     component = <EventsContextProvider>{component}</EventsContextProvider>
   }
   return <CommonLayout>{component}</CommonLayout>

@@ -25,7 +25,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import JoiDateExtension from '@joi/date'
 import * as JoiImport from 'joi'
-
+import tw from 'twin.macro'
 const Joi = JoiImport.extend(JoiDateExtension)
 
 const schema = Joi.object({
@@ -247,7 +247,7 @@ export const AddEventView = (_: Props) => {
     <>
       <SEO title="Trafem" description="" />
 
-      <Grid container flex={1}>
+      <Grid container flex={1} sx={{ ...tw`bg-ghost-white` }}>
         <Paper elevation={2} sx={paperStyle}>
           <Form onSubmit={handleSubmit(handleValid)}>
             <Grid container spacing={2} padding={2}>
